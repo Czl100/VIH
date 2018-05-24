@@ -137,6 +137,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Algorithm.cpp" />
+    <ClCompile Include="..\..\src\IAlgorithm.cpp" />
     <ClCompile Include="..\..\src\IPanelController.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
     <ClCompile Include="..\..\src\PanelController.cpp" />
@@ -305,6 +307,13 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
+    <ClInclude Include="..\..\inc\Algorithm.h" />
+    <ClInclude Include="..\..\inc\Config.h" />
+    <ClInclude Include="..\..\inc\DecoderConfig.h" />
+    <ClInclude Include="..\..\inc\defines.h" />
+    <ClInclude Include="..\..\inc\EncoderConfig.h" />
+    <ClInclude Include="..\..\inc\IAlgorithm.h" />
+    <ClInclude Include="..\..\inc\utils.h" />
     <ClInclude Include="GeneratedFiles\ui_vih.h" />
   </ItemGroup>
   <ItemGroup>

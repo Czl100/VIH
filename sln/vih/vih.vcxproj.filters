@@ -57,6 +57,21 @@
     <Filter Include="Source Files\mvc\models">
       <UniqueIdentifier>{bb69a1dd-c5c6-41bf-92bd-53bca936723f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\services">
+      <UniqueIdentifier>{53cbc03b-6861-41ce-8e3b-2a2b2e38cadf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\services\config">
+      <UniqueIdentifier>{3b8e1fe2-0a68-4c07-8f8b-175c51427df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\services\algorithm">
+      <UniqueIdentifier>{ee5ac55e-3c96-4ea0-88e2-7a30de871019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\services">
+      <UniqueIdentifier>{81c1447c-1d94-47d2-a72b-4273eb8af14f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\services\algorithm">
+      <UniqueIdentifier>{66261ba0-f981-4592-bb6f-4b52f7a811c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_vih.cpp">
@@ -110,6 +125,12 @@
     <ClCompile Include="..\..\src\PanelViewSlots.cpp">
       <Filter>Source Files\mvc\views</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\IAlgorithm.cpp">
+      <Filter>Source Files\services\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Algorithm.cpp">
+      <Filter>Source Files\services\algorithm</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="vih.ui">
@@ -137,6 +158,27 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_vih.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\Config.h">
+      <Filter>Header Files\services\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\DecoderConfig.h">
+      <Filter>Header Files\services\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\EncoderConfig.h">
+      <Filter>Header Files\services\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\Algorithm.h">
+      <Filter>Header Files\services\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\utils.h">
+      <Filter>Header Files\services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\IAlgorithm.h">
+      <Filter>Header Files\services\algorithm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
