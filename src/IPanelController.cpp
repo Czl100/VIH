@@ -10,14 +10,14 @@ using namespace std;
 void IPanelController::set_view(shared_ptr<IPanelView> view){
 	__view__ = view;
 	__view__->link_controller(*this);
-	if (__status_model__.get()){
+	if (__statusModel__.get()){
 	
 	}
 }
 
 void IPanelController::set_status_model(shared_ptr<PanelStatusModel> model){
-	__status_model__ = model;
+	__statusModel__ = model;
 	if (__view__.get()){
-		__status_model__->set_view(__view__);
+		__statusModel__->set_view(__view__);
 	}
 }

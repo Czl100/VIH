@@ -19,18 +19,18 @@ public:
 	void set_status_model(std::shared_ptr<PanelStatusModel> model);
 
 public slots :
-	// 打开目录选择视频文件
-	virtual void open_video_slot() = 0;
 
-	//// 播放视频
-	virtual void play_video_slot() = 0;
+	virtual void open_video_slot() = 0;		// 打开目录选择视频文件
+	virtual void play_video_slot() = 0;		// 播放视频
+	virtual void play_progress_slot() = 0;	// 调整进度条
 
-	////开始视频信息隐藏
-	virtual void start_vih_slot() = 0;
+	virtual void open_secert_slot() = 0;	// 打开目录选择秘密文件
+	virtual void start_vih_slot() = 0;		// 开始视频信息隐藏
+	virtual void start_ext_slot() = 0;		// 开始视频信息提取
 
 protected:
 	std::shared_ptr<IPanelView> __view__;
-	std::shared_ptr<PanelStatusModel> __status_model__;
+	std::shared_ptr<PanelStatusModel> __statusModel__;
 };
 
 #endif

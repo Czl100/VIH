@@ -142,6 +142,7 @@
     <ClCompile Include="..\..\src\PanelController.cpp" />
     <ClCompile Include="..\..\src\PanelStatusModel.cpp" />
     <ClCompile Include="..\..\src\PanelView.cpp" />
+    <ClCompile Include="..\..\src\PanelViewSlots.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_IPanelController.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

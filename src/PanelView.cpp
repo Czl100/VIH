@@ -17,11 +17,12 @@ PanelView::PanelView(QWidget *parent) : IPanelView(parent),
 __player__(new QMediaPlayer()), 
 __playButton__(new QPushButton("播放")), __openMediaButton__(new QPushButton("打开")), __vihShowButton__(new QPushButton("信息隐藏")),
 __vihWidget__(new QWidget), __progress__(new QProgressBar), __secertEdit__(new QLineEdit),
-__hideButton__(new QPushButton("隐藏信息")),__extButton__(new QPushButton("提取信息")){
+__hideButton__(new QPushButton("嵌入")), __extButton__(new QPushButton("提取")), __openSecertButton__(new QPushButton("..")){
 	
 	setWindowTitle("视频信息隐藏系统");
 	__progress__->setRange(0, 100);
 	__progress__->setValue(0);
+	__openSecertButton__->setFixedSize(22, 22);
 	__init_layout__();
 }
 
@@ -36,7 +37,7 @@ void PanelView::__init_layout__(){
 	QHBoxLayout * playerButtonLayout = new QHBoxLayout;
 	QVideoWidget* vw = new QVideoWidget();
 		// 2.1).配置videoWidget的属性
-		vw->setMinimumSize(400, 400);
+		vw->setMinimumSize(500, 400);
 		QPalette pal(vw->palette());
 		pal.setColor(QPalette::Background, Qt::black);
 		vw->setAutoFillBackground(true);
@@ -55,6 +56,7 @@ void PanelView::__init_layout__(){
 		QHBoxLayout* secLayout = new QHBoxLayout;
 		secLayout->addWidget(new QLabel("秘密文件"));
 		secLayout->addWidget(__secertEdit__);
+		secLayout->addWidget(__openSecertButton__);
 		// 3.2).
 		QHBoxLayout* vihStartLayout = new QHBoxLayout;
 		__vihWidget__->setLayout(vihStartLayout);
@@ -76,29 +78,20 @@ void PanelView::__init_layout__(){
 }
 
 void PanelView::link_controller(const IPanelController &controller){
+	// 打开多媒体选择目录的按钮事件注册
 	connect(__openMediaButton__, SIGNAL(clicked()), &controller, SLOT(open_video_slot()));
+
+	// 播放按钮事件注册
 	connect(__playButton__, SIGNAL(clicked()), &controller, SLOT(play_video_slot()));
+
+	// 显示和隐藏 信息隐藏相关的操作。
 	connect(__vihShowButton__, &QPushButton::clicked, this, [=](){
 		__vihWidget__->isHidden() ? __vihWidget__->show() : __vihWidget__->hide();
 	});
+
+	// 
+	connect(__openSecertButton__, SIGNAL(clicked()), &controller, SLOT(open_secert_slot()));
+	connect(__hideButton__, SIGNAL(clicked()), &controller, SLOT(start_vih_slot()));
+	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));
 }
 
-void PanelView::open_media_slot(const QString& path){
-	if (path.size()){
-		__player__->stop();
-		__player__->setMedia(QUrl::fromLocalFile(path));
-		__player__->play();
-		__player__->pause();
-		__playButton__->setDisabled(false);
-		__vihShowButton__->setDisabled(false);
-	}
-	else{
-		__playButton__->setDisabled(true);
-		__vihShowButton__->setDisabled(true);
-	}
-}
-
-void PanelView::play_slot(bool isplaying){
-	isplaying ? __player__->play() : __player__->pause();
-	__playButton__->setText(isplaying ? "暂停" : "播放");
-}

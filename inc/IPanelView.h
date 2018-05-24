@@ -28,6 +28,7 @@ public:
 public slots :
 	virtual void open_media_slot(const QString& mediaPath) = 0;
 	virtual void play_slot(bool isplaying) = 0;
+	virtual void open_secert_slot(const QString& mediaPath) = 0;
 };
 
 #endif

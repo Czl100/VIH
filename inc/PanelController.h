@@ -11,7 +11,11 @@ class PanelController : public IPanelController{
 public slots :
 	void open_video_slot() override;
 	void play_video_slot() override;
+	void play_progress_slot() override;
+
+	void open_secert_slot() override;
 	void start_vih_slot() override;
+	void start_ext_slot() override;
 };
 
 #endif

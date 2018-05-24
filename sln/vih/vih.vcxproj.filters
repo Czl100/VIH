@@ -107,6 +107,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_PanelStatusModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\PanelViewSlots.cpp">
+      <Filter>Source Files\mvc\views</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="vih.ui">

@@ -1,7 +1,6 @@
 Debug/
 *.opensdf
+*.sdf
 *.264
 *.yuv
 *.avi
-*.sdf
-*.suo
