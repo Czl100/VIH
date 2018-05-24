@@ -14,7 +14,6 @@ class QString;
 class BasePanelView{
 public:
 	virtual ~BasePanelView(){}
-
 	virtual void link_controller(const IPanelController &controller) = 0;
 };
 
