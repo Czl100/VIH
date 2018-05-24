@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{f315e975-2ec9-45cc-be09-cdf9322b7722}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{b4794a29-2b1d-4658-969c-65e485117e03}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Header Files\mvc">
+      <UniqueIdentifier>{52c2bc5a-0335-40dc-8035-da6f3891087e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mvc\views">
+      <UniqueIdentifier>{5404bfaf-9a57-4b87-aaaf-7e6afcd0e247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mvc\controllers">
+      <UniqueIdentifier>{d56873f3-e03d-493c-8fdd-6b32096ab070}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mvc\models">
+      <UniqueIdentifier>{3b9b3f02-ef7e-4aca-8451-ab0923639741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mvc">
+      <UniqueIdentifier>{34abfa90-daaa-444d-b12d-826cda0c87da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mvc\controllers">
+      <UniqueIdentifier>{35b65020-d99f-44ef-9764-a8b5d4245ab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mvc\views">
+      <UniqueIdentifier>{a79bc9ab-bea6-49b1-b97c-0611580d8dc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\mvc\models">
+      <UniqueIdentifier>{bb69a1dd-c5c6-41bf-92bd-53bca936723f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GeneratedFiles\qrc_vih.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PanelController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PanelController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PanelController.cpp">
+      <Filter>Source Files\mvc\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PanelView.cpp">
+      <Filter>Source Files\mvc\views</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PanelView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PanelView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\IPanelController.cpp">
+      <Filter>Source Files\mvc\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_IPanelController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_IPanelController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_IPanelView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_IPanelView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\PanelStatusModel.cpp">
+      <Filter>Source Files\mvc\models</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PanelStatusModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PanelStatusModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="vih.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="vih.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\PanelController.h">
+      <Filter>Header Files\mvc\controllers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\PanelView.h">
+      <Filter>Header Files\mvc\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\IPanelController.h">
+      <Filter>Header Files\mvc\controllers</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\IPanelView.h">
+      <Filter>Header Files\mvc\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\PanelStatusModel.h">
+      <Filter>Header Files\mvc\models</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_vih.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
