@@ -21,7 +21,7 @@ public:
 
 public slots :
 	void open_media_slot(const QString& mediaPath) override;
-	void play_slot(bool isplaying) override;
+	void play_slot(OperaStatus status) override;
 	void open_secert_slot(const QString& mediaPath) override;
 
 	void link_controller(const IPanelController &controller) override;

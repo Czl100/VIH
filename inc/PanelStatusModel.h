@@ -5,6 +5,7 @@
 #include <memory>
 #include <QList>
 #include "IAlgorithm.h"
+#include "defines.h"
 
 class QString;
 class IPanelView;
@@ -18,11 +19,11 @@ class PanelStatusModel : public QObject{
 signals :
 	void open_media_path_signal(const QString& path);
 	void open_secert_path_signal(const QString& path);
-	void play_signal(bool isplay);
+	void play_signal(OperaStatus status);
 
 // 初始化
 public:
-	PanelStatusModel() :__mediaPath__(""), __isplaying__(false), __algoIdx__(0){}
+	PanelStatusModel() :__mediaPath__(""), __playStatus__(STOP), __algoIdx__(0){}
 
 // 将信号和view的slots连接
 public:
@@ -31,7 +32,7 @@ public:
 // 写函数
 public:
 	void media_path(const QString& path);
-	void playing(bool isplaying);
+	void play_status(OperaStatus status);
 	void secert_path(const QString& path);
 	void add_algorithm(std::shared_ptr<IAlgorithm> algorithm);
 	void algo_idx(int idx);
@@ -39,7 +40,7 @@ public:
 // 读函数
 public:
 	const QString& media_path();
-	bool playing();
+	OperaStatus play_status();
 	const QString& secert_path();
 	const QStringList algos_list();
 	int algo_idx();
@@ -47,7 +48,7 @@ public:
 private:
 	QString __mediaPath__;
 	QString __secertPath__;
-	bool __isplaying__;
+	OperaStatus __playStatus__;
 	QList<std::shared_ptr<IAlgorithm>> __algos__;
 	int __algoIdx__;
 };

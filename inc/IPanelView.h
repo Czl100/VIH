@@ -6,6 +6,7 @@
 
 #include <QObject>
 #include <QtWidgets/QMainWindow>
+#include "defines.h"
 
 class IPanelController;
 class QString;
@@ -26,7 +27,7 @@ public:
 
 public slots :
 	virtual void open_media_slot(const QString& mediaPath) = 0;
-	virtual void play_slot(bool isplaying) = 0;
+	virtual void play_slot(OperaStatus status) = 0;
 	virtual void open_secert_slot(const QString& mediaPath) = 0;
 };
 

@@ -18,7 +18,15 @@ void PanelController::open_video_slot(){
 }
 
 void PanelController::play_video_slot(){
-	__statusModel__->playing(!__statusModel__->playing());
+	OperaStatus status = __statusModel__->play_status();
+	switch (status){
+	case PAUSE:
+		__statusModel__->play_status(RUNNING);
+		break;
+	case RUNNING:
+		__statusModel__->play_status(PAUSE);
+		break;
+	}
 }
 
 void PanelController::play_progress_slot(){

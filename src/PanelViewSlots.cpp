@@ -23,9 +23,20 @@ void PanelView::open_media_slot(const QString& path){
 	}
 }
 
-void PanelView::play_slot(bool isplaying){
-	isplaying ? __player__->play() : __player__->pause();
-	__playButton__->setText(isplaying ? "暂停" : "播放");
+void PanelView::play_slot(OperaStatus status){
+	switch (status){
+	case STOP:
+		__player__->stop();
+		break;
+	case RUNNING:
+		__player__->play();
+		__playButton__->setText("暂停");
+		break;
+	case PAUSE:
+		__player__->pause();
+		__playButton__->setText("播放");
+		break;
+	}
 }
 
 void PanelView::open_secert_slot(const QString& path){

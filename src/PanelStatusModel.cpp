@@ -5,7 +5,7 @@
 
 void PanelStatusModel::set_view(std::shared_ptr<IPanelView> v){
 	connect(this, SIGNAL(open_media_path_signal(const QString&)), v.get(), SLOT(open_media_slot(const QString&)));
-	connect(this, SIGNAL(play_signal(bool)), v.get(), SLOT(play_slot(bool)));
+	connect(this, SIGNAL(play_signal(OperaStatus)), v.get(), SLOT(play_slot(OperaStatus)));
 	connect(this, SIGNAL(open_secert_path_signal(const QString&)), v.get(), SLOT(open_secert_slot(const QString&)));
 
 	// 根据model的当前状态，渲染view
@@ -16,8 +16,8 @@ void PanelStatusModel::set_view(std::shared_ptr<IPanelView> v){
 const QString& PanelStatusModel::media_path(){
 	return __mediaPath__;
 }
-bool PanelStatusModel::playing() {
-	return __isplaying__;
+OperaStatus PanelStatusModel::play_status() {
+	return __playStatus__;
 }
 
 const QString& PanelStatusModel::secert_path(){
@@ -42,12 +42,13 @@ void PanelStatusModel::media_path(const QString& path){
 	if (__mediaPath__.compare(path)){
 		__mediaPath__ = path;
 		emit open_media_path_signal(__mediaPath__);
+		__playStatus__ = PAUSE;
 	}
 }
-void PanelStatusModel::playing(bool isplaying) {
-	if (__isplaying__ != isplaying){
-		__isplaying__ = isplaying;
-		emit play_signal(__isplaying__);
+void PanelStatusModel::play_status(OperaStatus status) {
+	if (__playStatus__ != status){
+		__playStatus__ = status;
+		emit play_signal(__playStatus__);
 	}
 }
 
