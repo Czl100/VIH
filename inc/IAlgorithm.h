@@ -13,11 +13,15 @@
 class IAlgorithm {
 
 public:
-	IAlgorithm(const QString &exeRootDir, const QString &_algoName) :
-		__algoName__(_algoName), __exespace__(exeRootDir + "/" + __algoName__ + "/"), 
-		__encoderPath__(__exespace__ + "lencod.exe"), __decoderPath__(__exespace__ + "ldecod.exe"),
-		__workspace__(__exespace__ + "/workspace")
-		{}
+	IAlgorithm(const QString &algorithmsDir, const QString &_algoName) :
+		__algoName__(_algoName)
+		{
+			__exespace__ = algorithmsDir + "/" + __algoName__ + "/";
+			__encoderPath__ = __exespace__ + "lencod.exe";
+			__decoderPath__ = __exespace__ + "ldecod.exe";
+			__workspace__ = __exespace__ + "/workspace";
+
+	}
 
 	virtual ~IAlgorithm(){}
 
@@ -71,9 +75,10 @@ protected:
 	static QString s_decoderCfgPath;
 
 public:
-	static void open_algorithm_config(const QString &exeRootDir){
-		s_encoderCfgPath = exeRootDir + "/encoder.cfg";
-		s_decoderCfgPath = exeRootDir + "/decoder.cfg";
+
+	static void open_algorithm_config(const QString &algorithmsDir){
+		s_encoderCfgPath = algorithmsDir + "/encoder.cfg";
+		s_decoderCfgPath = algorithmsDir + "/decoder.cfg";
 
 		// 加载配置文件到内存
 		s_cfg[0] = std::shared_ptr<Config>(new EncoderConfig(s_encoderCfgPath));

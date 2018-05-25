@@ -6,6 +6,7 @@
 #include "PanelStatusModel.h"
 #include <QFileDialog>
 #include <QUrl>
+#include "OpenAlgorithmsDialog.h"
 
 void PanelController::open_video_slot(){
 	QString path = QFileDialog::getOpenFileName(nullptr, "选择多媒体文件", ".", "*.*");
@@ -22,6 +23,13 @@ void PanelController::play_video_slot(){
 
 void PanelController::play_progress_slot(){
 
+}
+
+void PanelController::open_algorithm_slot(){
+	OpenAlgorithmsDialog dialog = OpenAlgorithmsDialog(__statusModel__->algo_idx(), __statusModel__->algos_list());
+	dialog.exec();
+	int newidx = dialog.retval();
+	__statusModel__->algo_idx(newidx);
 }
 
 void PanelController::open_secert_slot() {

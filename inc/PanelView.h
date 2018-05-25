@@ -12,6 +12,7 @@ class QPushButton;
 class IPanelController;
 class QProgressBar;
 class QLineEdit;
+class QAction;
 
 class PanelView : public IPanelView{
 	Q_OBJECT
@@ -39,6 +40,7 @@ private:
 	QWidget* __vihWidget__;
 	QLineEdit* __secertEdit__;
 	QPushButton* __openSecertButton__;
+	QAction * __openAlgorithmAction__;
 };
 
 

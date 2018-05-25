@@ -10,6 +10,7 @@
 #include <QMenuBar>
 #include <QProgressBar>
 #include <QLabel>
+#include <QAction>
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimediaWidgets/QVideoWidget>
 
@@ -74,7 +75,9 @@ void PanelView::__init_layout__(){
 	panelLayout->addLayout(secLayout);
 
 	// 5).菜单栏
+	__openAlgorithmAction__ = new QAction("算法选择", this);
 	QMenu *toolMenu = menuBar()->addMenu("工具箱");
+	toolMenu->addAction(__openAlgorithmAction__);
 }
 
 void PanelView::link_controller(const IPanelController &controller){
@@ -90,6 +93,7 @@ void PanelView::link_controller(const IPanelController &controller){
 	});
 
 	// 
+	connect(__openAlgorithmAction__, SIGNAL(triggered()), &controller, SLOT(open_algorithm_slot()));
 	connect(__openSecertButton__, SIGNAL(clicked()), &controller, SLOT(open_secert_slot()));
 	connect(__hideButton__, SIGNAL(clicked()), &controller, SLOT(start_vih_slot()));
 	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));

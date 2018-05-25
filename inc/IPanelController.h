@@ -27,6 +27,7 @@ public slots :
 	virtual void open_secert_slot() = 0;	// 打开目录选择秘密文件
 	virtual void start_vih_slot() = 0;		// 开始视频信息隐藏
 	virtual void start_ext_slot() = 0;		// 开始视频信息提取
+	virtual void open_algorithm_slot() = 0;	// 选择算法
 
 protected:
 	std::shared_ptr<IPanelView> __view__;

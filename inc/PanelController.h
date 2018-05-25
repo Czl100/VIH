@@ -16,6 +16,7 @@ public slots :
 	void open_secert_slot() override;
 	void start_vih_slot() override;
 	void start_ext_slot() override;
+	void open_algorithm_slot() override;
 };
 
 #endif

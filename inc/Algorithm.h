@@ -9,7 +9,7 @@
 class Algorithm : public IAlgorithm{
 
 public:
-	Algorithm(const QString &exeRootDir, const QString &_algoName) :IAlgorithm(exeRootDir, _algoName){}
+	Algorithm(const QString &algorithmsDir, const QString &_algoName) :IAlgorithm(algorithmsDir, _algoName){}
 
 public:
 	void sync(OperaType type)override;
