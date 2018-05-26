@@ -1,56 +1,53 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef __PANEL_STATUS_MODEL_H
 #define __PANEL_STATUS_MODEL_H
 
 #include <QObject>
 #include <memory>
 #include <QList>
-#include "IAlgorithm.h"
+#include "AlgosModel.h"
 #include "defines.h"
 
 class QString;
 class IPanelView;
 class Algorithm;
 
-class PanelStatusModel : public QObject{
+class PanelStatusModel : public QObject, public AlgosModel{
 
 	Q_OBJECT
 
-// ·¢ËÍµÄĞÅºÅ
+// å‘é€çš„ä¿¡å·
 signals :
 	void open_media_path_signal(const QString& path);
 	void open_secert_path_signal(const QString& path);
 	void play_signal(OperaStatus status);
 
-// ³õÊ¼»¯
+// åˆå§‹åŒ–
 public:
-	PanelStatusModel() :__mediaPath__(""), __playStatus__(STOP), __algoIdx__(0){}
+	PanelStatusModel() :__mediaPath__(""), __playStatus__(STOP){}
 
-// ½«ĞÅºÅºÍviewµÄslotsÁ¬½Ó
+// å°†ä¿¡å·å’Œviewçš„slotsè¿æ¥
 public:
 	void set_view(std::shared_ptr<IPanelView> v);
 
-// Ğ´º¯Êı
+// å†™å‡½æ•°
 public:
 	void media_path(const QString& path);
 	void play_status(OperaStatus status);
 	void secert_path(const QString& path);
-	void add_algorithm(std::shared_ptr<IAlgorithm> algorithm);
-	void algo_idx(int idx);
 
-// ¶Áº¯Êı
+// è¯»å‡½æ•°
 public:
 	const QString& media_path();
 	OperaStatus play_status();
 	const QString& secert_path();
-	const QStringList algos_list();
-	int algo_idx();
 
 private:
 	QString __mediaPath__;
 	QString __secertPath__;
 	OperaStatus __playStatus__;
-	QList<std::shared_ptr<IAlgorithm>> __algos__;
-	int __algoIdx__;
 };
 
 #endif

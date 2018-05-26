@@ -1,3 +1,6 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef _DEFINES_H
 #define _DEFINES_H
 
@@ -8,13 +11,13 @@ inline const QString& getApplicationConfigFilePath(){
 	return APPLICATION_CONFIG_FILE;
 }
 
-// ²Ù×÷ÀàĞÍ£º±àÂë¡¢½âÂë
+// æ“ä½œç±»å‹ï¼šç¼–ç ã€è§£ç 
 enum OperaType{
 	ENCODE = 0,
 	DECODE
 };
 
-// ²Ù×÷×´Ì¬£ºÍ£Ö¹¡¢ÔËĞĞ¡¢ÔİÍ£¡£
+// æ“ä½œçŠ¶æ€ï¼šåœæ­¢ã€è¿è¡Œã€æš‚åœã€‚
 enum OperaStatus{
 	STOP=0,
 	RUNNING,

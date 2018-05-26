@@ -78,6 +78,12 @@
     <Filter Include="Source Files\dialogs">
       <UniqueIdentifier>{11fc6840-845c-4a9d-8a53-1f426eda57a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\services\vihthread">
+      <UniqueIdentifier>{e783a714-1473-4a93-8faf-7d9693930ed8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\services\vihthread">
+      <UniqueIdentifier>{280bd805-cd3a-4d57-a4d2-4a36cf3daa43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_vih.cpp">
@@ -146,6 +152,12 @@
     <ClCompile Include="..\..\src\OpenAlgorithmsDialog.cpp">
       <Filter>Source Files\dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\VihThread.cpp">
+      <Filter>Source Files\services\vihthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\AlgosModel.cpp">
+      <Filter>Source Files\mvc\models</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="vih.ui">
@@ -203,6 +215,15 @@
     </ClInclude>
     <ClInclude Include="..\..\inc\WTQAlgorithm.h">
       <Filter>Header Files\services\algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\VihThread.h">
+      <Filter>Header Files\services\vihthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\VihTreadRunner.h">
+      <Filter>Header Files\services\vihthread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\AlgosModel.h">
+      <Filter>Header Files\mvc\models</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

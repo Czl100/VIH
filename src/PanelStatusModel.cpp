@@ -24,18 +24,6 @@ const QString& PanelStatusModel::secert_path(){
 	return __secertPath__;
 }
 
-const QStringList PanelStatusModel::algos_list(){
-	QStringList algolist;
-	for (int i = 0; i < __algos__.size(); i++){
-		algolist.append(__algos__[i]->algo_name());
-	}
-	return algolist;
-}
-
-int PanelStatusModel::algo_idx(){
-	return __algoIdx__;
-}
-
 // ================================ 写入数据 ================================
 void PanelStatusModel::media_path(const QString& path){
 	// 路径不同则重新打开媒体
@@ -58,12 +46,4 @@ void PanelStatusModel::secert_path(const QString& secertPath){
 		__secertPath__ = secertPath;
 		emit open_secert_path_signal(__secertPath__);
 	}
-}
-
-void PanelStatusModel::add_algorithm(std::shared_ptr<IAlgorithm> algorithm){
-	__algos__.append(algorithm);
-}
-
-void PanelStatusModel::algo_idx(int idx){
-	__algoIdx__ = idx;
 }

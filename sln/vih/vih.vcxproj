@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Algorithm.cpp" />
+    <ClCompile Include="..\..\src\AlgosModel.cpp" />
     <ClCompile Include="..\..\src\IAlgorithm.cpp" />
     <ClCompile Include="..\..\src\IPanelController.cpp" />
     <ClCompile Include="..\..\src\main.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="..\..\src\PanelStatusModel.cpp" />
     <ClCompile Include="..\..\src\PanelView.cpp" />
     <ClCompile Include="..\..\src\PanelViewSlots.cpp" />
+    <ClCompile Include="..\..\src\VihThread.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_IPanelController.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -317,6 +319,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath);$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
     </CustomBuild>
     <ClInclude Include="..\..\inc\Algorithm.h" />
+    <ClInclude Include="..\..\inc\AlgosModel.h" />
     <ClInclude Include="..\..\inc\Config.h" />
     <ClInclude Include="..\..\inc\DecoderConfig.h" />
     <ClInclude Include="..\..\inc\defines.h" />
@@ -342,6 +345,8 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_MULTIMEDIAWIDGETS_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtMultimediaWidgets" "-I$(QTDIR)\include\QtWidgets" "-ID:\Program Files (x86)\Visual Leak Detector\include"</Command>
     </CustomBuild>
     <ClInclude Include="..\..\inc\utils.h" />
+    <ClInclude Include="..\..\inc\VihThread.h" />
+    <ClInclude Include="..\..\inc\VihTreadRunner.h" />
     <ClInclude Include="..\..\inc\WTQAlgorithm.h" />
     <ClInclude Include="GeneratedFiles\ui_vih.h" />
   </ItemGroup>
