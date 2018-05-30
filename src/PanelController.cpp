@@ -7,6 +7,15 @@
 #include <QFileDialog>
 #include <QUrl>
 #include "OpenAlgorithmsDialog.h"
+#include "HideThread.h"
+#include <QMessageBox>
+
+using namespace std;
+
+PanelController::PanelController(){
+	connect(&__runner__, SIGNAL(runnerSignal(int, const QString &, int)),
+		this, SLOT(runnerSlot(int exitCode, const QString &line, int val)));
+}
 
 void PanelController::open_video_slot(){
 	QString path = QFileDialog::getOpenFileName(nullptr, "选择多媒体文件", ".", "*.*");
@@ -49,9 +58,23 @@ void PanelController::open_secert_slot() {
 }
 
 void PanelController::start_vih_slot(){
+	if (QMessageBox::information(nullptr, "视频信息隐藏系统", "开始信息隐藏", QMessageBox::Yes | QMessageBox::No)
+		== QMessageBox::No){
+		return;
+	}
 
+	if (__runner__.start(shared_ptr<VihThread>(new HideThread(__statusModel__)))){
+	
+	}
+	else{		// 运行失败
+	
+	}
 }
 
 void PanelController::start_ext_slot() {
+
+}
+
+void PanelController::runnerSlot(int exitCode, const QString &line, int val){
 
 }

@@ -13,6 +13,7 @@ class IPanelController;
 class QProgressBar;
 class QLineEdit;
 class QAction;
+class QGroupBox;
 
 class PanelView : public IPanelView{
 	Q_OBJECT
@@ -30,17 +31,27 @@ private:
 	void __init_layout__();
 
 private:
+	QAction * __openAlgorithmAction__;
+
 	QMediaPlayer* __player__;
 	QPushButton* __playButton__;
 	QPushButton* __openMediaButton__;
-	QPushButton* __vihShowButton__;
+	QPushButton* __embShowButton__;
+	QPushButton* __extShowButton__;
+
 	QPushButton* __hideButton__;
+	QProgressBar* __embProgress__;
+	QGroupBox* __embWidget__;
+	QLineEdit* __embSecretEdit__;
+	QLineEdit* __embMediaEdit__; 
+	QPushButton* __openEmbSecretButton__;
+	QPushButton* __openEmbMediaButton__;
+
 	QPushButton* __extButton__;
-	QProgressBar* __progress__;
-	QWidget* __vihWidget__;
-	QLineEdit* __secertEdit__;
-	QPushButton* __openSecertButton__;
-	QAction * __openAlgorithmAction__;
+	QGroupBox* __extWidget__;
+	QProgressBar* __extProgress__;
+	QLineEdit* __extSecretEdit__;
+	QPushButton* __openExtSecertButton__;
 };
 
 

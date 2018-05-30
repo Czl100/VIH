@@ -8,6 +8,7 @@
 #include <PanelStatusModel.h>
 #include <memory>
 #include "Algorithm.h"
+#include "AlgoConf.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
 }
 
 void loadModel(shared_ptr<PanelStatusModel> m){
-	IAlgorithm::open_algorithm_config("algorithms/");
+	AlgoConf::open_algorithm_config("algorithms/");
 	m->add_algorithm(shared_ptr<Algorithm>(new Algorithm("algorithms/", "测试1")));
 	m->add_algorithm(shared_ptr<Algorithm>(new Algorithm("algorithms/", "测试2")));
 	m->add_algorithm(shared_ptr<Algorithm>(new Algorithm("algorithms/", "测试3")));

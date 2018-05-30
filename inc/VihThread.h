@@ -7,27 +7,28 @@
 #include <QThread>
 #include <QString>
 #include <QStringList>
+#include <memory>
+#include <QProcess>
+#include "PanelStatusModel.h"
 
-class PanelStatusModel;
+class AlgosModel;
 
 class VihThread : public QThread{
+	Q_OBJECT
 public:
-	VihThread(const QString& mediaPath, const PanelStatusModel& model);
-	~VihThread(){}
+	VihThread() : stopped(true){}
+	virtual ~VihThread(){}
+
+signals:
+	void algoMessageSignal(int exitCode, const QString &line, int val);
+
+public slots:
+	void processErrorSlot(QProcess::ProcessError error);
 
 public:
 	void stop();
 
 protected:
-	void run() override;
-
-private:
-	QString __mediaPath__;
-	QString __workspace__;
-	QString __exePath__;
-	QStringList __env__;
-	QStringList __args__;
-	int base;
 	volatile bool stopped;
 };
 

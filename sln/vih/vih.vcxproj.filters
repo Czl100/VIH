@@ -84,6 +84,12 @@
     <Filter Include="Source Files\services\vihthread">
       <UniqueIdentifier>{280bd805-cd3a-4d57-a4d2-4a36cf3daa43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\services\empeg">
+      <UniqueIdentifier>{4f254d2e-8097-488c-95c2-c86f684cdc29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\services\empeg">
+      <UniqueIdentifier>{a820cd93-b737-4ddb-b4e9-658f22d8f533}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_vih.cpp">
@@ -152,11 +158,53 @@
     <ClCompile Include="..\..\src\OpenAlgorithmsDialog.cpp">
       <Filter>Source Files\dialogs</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\AlgosModel.cpp">
+      <Filter>Source Files\mvc\models</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\src\VihThread.cpp">
       <Filter>Source Files\services\vihthread</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\AlgosModel.cpp">
-      <Filter>Source Files\mvc\models</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VihThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VihThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\empeg\Emedia.cpp">
+      <Filter>Source Files\services\empeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\empeg\EmediaImpl.cpp">
+      <Filter>Source Files\services\empeg</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\AlgoConf.cpp">
+      <Filter>Source Files\services\algorithm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\VihThreadRunner.cpp">
+      <Filter>Source Files\services\vihthread</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VihThreadRunner.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VihThreadRunner.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HideThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HideThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ExtThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ExtThread.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\HideThread.cpp">
+      <Filter>Source Files\services\vihthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ExtThread.cpp">
+      <Filter>Source Files\services\vihthread</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +231,18 @@
     </CustomBuild>
     <CustomBuild Include="..\..\inc\OpenAlgorithmsDialog.h">
       <Filter>Header Files\dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\VihThread.h">
+      <Filter>Header Files\services\vihthread</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\VihThreadRunner.h">
+      <Filter>Header Files\services\vihthread</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\HideThread.h">
+      <Filter>Header Files\services\vihthread</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\inc\ExtThread.h">
+      <Filter>Header Files\services\vihthread</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -216,14 +276,20 @@
     <ClInclude Include="..\..\inc\WTQAlgorithm.h">
       <Filter>Header Files\services\algorithm</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\inc\VihThread.h">
-      <Filter>Header Files\services\vihthread</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\inc\VihTreadRunner.h">
-      <Filter>Header Files\services\vihthread</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\inc\AlgosModel.h">
       <Filter>Header Files\mvc\models</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\empeg\Emedia.h">
+      <Filter>Header Files\services\empeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\empeg\EmediaImpl.h">
+      <Filter>Header Files\services\empeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\empeg\EmpegException.h">
+      <Filter>Header Files\services\empeg</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\inc\AlgoConf.h">
+      <Filter>Header Files\services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

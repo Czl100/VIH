@@ -13,17 +13,25 @@
 #include <QAction>
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimediaWidgets/QVideoWidget>
+#include <QGroupBox>
 
 PanelView::PanelView(QWidget *parent) : IPanelView(parent),
 __player__(new QMediaPlayer()), 
-__playButton__(new QPushButton("播放")), __openMediaButton__(new QPushButton("打开")), __vihShowButton__(new QPushButton("信息隐藏")),
-__vihWidget__(new QWidget), __progress__(new QProgressBar), __secertEdit__(new QLineEdit),
-__hideButton__(new QPushButton("嵌入")), __extButton__(new QPushButton("提取")), __openSecertButton__(new QPushButton("..")){
+__playButton__(new QPushButton("播放")), __openMediaButton__(new QPushButton("打开")), __embShowButton__(new QPushButton("信息嵌入")),
+__extShowButton__(new QPushButton("信息提取")), __embWidget__(new QGroupBox("嵌入面板")), __embProgress__(new QProgressBar),
+__embSecretEdit__(new QLineEdit), __embMediaEdit__(new QLineEdit), __openEmbSecretButton__(new QPushButton("..")),
+__openEmbMediaButton__(new QPushButton("..")), __hideButton__(new QPushButton("嵌入")),
+__extWidget__(new QGroupBox("提取面板")), __openExtSecertButton__(new QPushButton("..")), __extSecretEdit__(new QLineEdit),
+__extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")) {
 	
 	setWindowTitle("视频信息隐藏系统");
-	__progress__->setRange(0, 100);
-	__progress__->setValue(0);
-	__openSecertButton__->setFixedSize(22, 22);
+	__embProgress__->setRange(0, 100);
+	__embProgress__->setValue(0);
+	__extProgress__->setRange(0, 100);
+	__extProgress__->setValue(0);
+	__openEmbSecretButton__->setFixedSize(22, 22);
+	__openEmbMediaButton__->setFixedSize(22, 22);
+	__openExtSecertButton__->setFixedSize(22, 22);
 	__init_layout__();
 }
 
@@ -46,35 +54,59 @@ void PanelView::__init_layout__(){
 	__player__->setVideoOutput(vw);
 	playerButtonLayout->addWidget(__openMediaButton__);
 	playerButtonLayout->addWidget(__playButton__);
-	playerButtonLayout->addWidget(__vihShowButton__);
+	playerButtonLayout->addWidget(__embShowButton__);
+	playerButtonLayout->addWidget(__extShowButton__);
 	playerLayout->addWidget(vw);
 	playerLayout->addLayout(playerButtonLayout);
 
-	// 3).信息隐藏界面
-	QVBoxLayout* vihLayout = new QVBoxLayout;
-	__vihWidget__->setLayout(vihLayout);
+	// 3).信息嵌入界面
+	QVBoxLayout* embLayout = new QVBoxLayout;
+	__embWidget__->setLayout(embLayout);
 		// 3.1).
-		QHBoxLayout* secLayout = new QHBoxLayout;
-		secLayout->addWidget(new QLabel("秘密文件"));
-		secLayout->addWidget(__secertEdit__);
-		secLayout->addWidget(__openSecertButton__);
+		QHBoxLayout* embSecLayout = new QHBoxLayout;
+		embSecLayout->addWidget(new QLabel("秘密文件"));
+		embSecLayout->addWidget(__embSecretEdit__);
+		embSecLayout->addWidget(__openEmbSecretButton__);
 		// 3.2).
-		QHBoxLayout* vihStartLayout = new QHBoxLayout;
-		__vihWidget__->setLayout(vihStartLayout);
-		vihStartLayout->addWidget(new QLabel("工作进度"));
-		vihStartLayout->addWidget(__progress__);			// 进度条
-		vihStartLayout->addWidget(__hideButton__);			// 按钮
-		vihStartLayout->addWidget(__extButton__);			// 按钮
-	vihLayout->addLayout(secLayout);
-	vihLayout->addLayout(vihStartLayout);
-	__vihWidget__->hide();
+		QHBoxLayout* embMediaLayout = new QHBoxLayout;
+		embMediaLayout->addWidget(new QLabel("载密视频"));
+		embMediaLayout->addWidget(__embMediaEdit__);
+		embMediaLayout->addWidget(__openEmbMediaButton__);
+		// 3.3).
+		QHBoxLayout* embStartLayout = new QHBoxLayout;
+		__embWidget__->setLayout(embStartLayout);
+		embStartLayout->addWidget(new QLabel("工作进度"));
+		embStartLayout->addWidget(__embProgress__);			// 进度条
+		embStartLayout->addWidget(__hideButton__);			// 按钮
+	embLayout->addLayout(embSecLayout);
+	embLayout->addLayout(embMediaLayout);
+	embLayout->addLayout(embStartLayout);
+	__embWidget__->hide();
 
-	// 4).
+	// 4).信息提取解码
+	QVBoxLayout* extLayout = new QVBoxLayout;
+	__extWidget__->setLayout(extLayout);
+		// 4.1).
+		QHBoxLayout* extSecLayout = new QHBoxLayout;
+		extSecLayout->addWidget(new QLabel("秘密文件"));
+		extSecLayout->addWidget(__extSecretEdit__);
+		extSecLayout->addWidget(__openExtSecertButton__);
+		// 4.2).
+		QHBoxLayout* extStartLayout = new QHBoxLayout;
+		__extWidget__->setLayout(extStartLayout);
+		extStartLayout->addWidget(new QLabel("工作进度"));
+		extStartLayout->addWidget(__extProgress__);			// 进度条
+		extStartLayout->addWidget(__extButton__);			// 按钮
+	extLayout->addLayout(extSecLayout);
+	extLayout->addLayout(extStartLayout);
+	__extWidget__->hide();
+
+	// 5).
 	panelLayout->addLayout(playerLayout);
-	panelLayout->addWidget(__vihWidget__);
-	panelLayout->addLayout(secLayout);
+	panelLayout->addWidget(__embWidget__);
+	panelLayout->addWidget(__extWidget__);
 
-	// 5).菜单栏
+	// 6).菜单栏
 	__openAlgorithmAction__ = new QAction("算法选择", this);
 	QMenu *toolMenu = menuBar()->addMenu("工具箱");
 	toolMenu->addAction(__openAlgorithmAction__);
@@ -88,13 +120,29 @@ void PanelView::link_controller(const IPanelController &controller){
 	connect(__playButton__, SIGNAL(clicked()), &controller, SLOT(play_video_slot()));
 
 	// 显示和隐藏 信息隐藏相关的操作。
-	connect(__vihShowButton__, &QPushButton::clicked, this, [=](){
-		__vihWidget__->isHidden() ? __vihWidget__->show() : __vihWidget__->hide();
+	connect(__embShowButton__, &QPushButton::clicked, this, [=](){
+		if (__embWidget__->isHidden()){
+			__extWidget__->hide();
+			__embWidget__->show();
+		}
+		else{
+			__embWidget__->hide();
+		}
+	});
+
+	connect(__extShowButton__, &QPushButton::clicked, this, [=](){
+		if (__extWidget__->isHidden()){
+			__embWidget__->hide();
+			__extWidget__->show();
+		}
+		else{
+			__extWidget__->hide();
+		}
 	});
 
 	// 
 	connect(__openAlgorithmAction__, SIGNAL(triggered()), &controller, SLOT(open_algorithm_slot()));
-	connect(__openSecertButton__, SIGNAL(clicked()), &controller, SLOT(open_secert_slot()));
+	connect(__openEmbSecretButton__, SIGNAL(clicked()), &controller, SLOT(open_secert_slot()));
 	connect(__hideButton__, SIGNAL(clicked()), &controller, SLOT(start_vih_slot()));
 	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));
 }

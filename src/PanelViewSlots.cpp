@@ -15,11 +15,13 @@ void PanelView::open_media_slot(const QString& path){
 		__player__->play();
 		__player__->pause();
 		__playButton__->setDisabled(false);
-		__vihShowButton__->setDisabled(false);
+		__embShowButton__->setDisabled(false);
+		__extShowButton__->setDisabled(false);
 	}
 	else{
 		__playButton__->setDisabled(true);
-		__vihShowButton__->setDisabled(true);
+		__embShowButton__->setDisabled(true);
+		__extShowButton__->setDisabled(true);
 	}
 }
 
@@ -40,5 +42,5 @@ void PanelView::play_slot(OperaStatus status){
 }
 
 void PanelView::open_secert_slot(const QString& path){
-	__secertEdit__->setText(path);
+	__embSecretEdit__->setText(path);
 }

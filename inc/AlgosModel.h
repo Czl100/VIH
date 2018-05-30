@@ -17,15 +17,14 @@ public:
 
 // 读函数
 public:
-	const QString workspace();
-	const QString exe_path();
+	QString workspace();
+	QString exe_path();
 	const QStringList algos_list();
 	int algo_idx();
+	void loadEnvAndArgs(QStringList &env, QStringList &args);
 
 // 写函数
 public:
-	void workspace(const QString& ws);
-	void exe_path(const QString& ep);
 	void add_algorithm(std::shared_ptr<IAlgorithm> algorithm);
 	void algo_idx(int idx);
 
