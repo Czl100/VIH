@@ -1,7 +1,7 @@
 ﻿#pragma once
 #pragma execution_character_set("utf-8")
 
-#include "HideThread.h"
+#include "EmbThread.h"
 #include "empeg/Emedia.h"
 #include "PanelStatusModel.h"
 #include "AlgoConf.h"
@@ -9,14 +9,14 @@
 
 using namespace std;
 
-HideThread::HideThread(shared_ptr<PanelStatusModel> model){
+EmbThread::EmbThread(shared_ptr<PanelStatusModel> model){
 	__mediaPath__ = model->media_path();
 	__workspace__ = model->workspace();
 	__exePath__ = model->exe_path();
 	model->loadEnvAndArgs(__env__, __args__);			// 秘密文件的路径是在model中的
 }
 
-void HideThread::run(){
+void EmbThread::run(){
 	// 1).media->yuv转换
 	shared_ptr<Emedia> media = Emedia::generate(__mediaPath__.toStdString());
 	QString yuvwhere = "D://media.yuv";

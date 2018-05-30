@@ -188,23 +188,23 @@
     <ClCompile Include="GeneratedFiles\Release\moc_VihThreadRunner.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_HideThread.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_HideThread.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ExtThread.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_ExtThread.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\HideThread.cpp">
-      <Filter>Source Files\services\vihthread</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\ExtThread.cpp">
       <Filter>Source Files\services\vihthread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\EmbThread.cpp">
+      <Filter>Source Files\services\vihthread</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EmbThread.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EmbThread.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,10 +238,10 @@
     <CustomBuild Include="..\..\inc\VihThreadRunner.h">
       <Filter>Header Files\services\vihthread</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\inc\HideThread.h">
+    <CustomBuild Include="..\..\inc\ExtThread.h">
       <Filter>Header Files\services\vihthread</Filter>
     </CustomBuild>
-    <CustomBuild Include="..\..\inc\ExtThread.h">
+    <CustomBuild Include="..\..\inc\EmbThread.h">
       <Filter>Header Files\services\vihthread</Filter>
     </CustomBuild>
   </ItemGroup>

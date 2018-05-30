@@ -7,7 +7,7 @@
 #include <QFileDialog>
 #include <QUrl>
 #include "OpenAlgorithmsDialog.h"
-#include "HideThread.h"
+#include "EmbThread.h"
 #include <QMessageBox>
 
 using namespace std;
@@ -63,7 +63,7 @@ void PanelController::start_vih_slot(){
 		return;
 	}
 
-	if (__runner__.start(shared_ptr<VihThread>(new HideThread(__statusModel__)))){
+	if (__runner__.start(shared_ptr<VihThread>(new EmbThread(__statusModel__)))){
 	
 	}
 	else{		// 运行失败

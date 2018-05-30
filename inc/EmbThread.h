@@ -7,11 +7,11 @@
 #include "VihThread.h"
 #include <memory>
 
-class HideThread : public VihThread{
+class EmbThread : public VihThread{
 	Q_OBJECT
 public:
-	HideThread(std::shared_ptr<PanelStatusModel> model);
-	~HideThread(){}
+	EmbThread(std::shared_ptr<PanelStatusModel> model);
+	~EmbThread(){}
 
 protected:
 	void run() override;
