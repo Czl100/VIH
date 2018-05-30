@@ -23,7 +23,10 @@ public:
 public slots :
 	void open_media_slot(const QString& mediaPath) override;
 	void play_slot(OperaStatus status) override;
-	void open_secert_slot(const QString& mediaPath) override;
+	void open_emb_secert_slot(const QString& mediaPath) override;
+	void save_emb_media_slot(const QString& path) override;
+
+	void save_ext_secert_slot(const QString& path) override;
 
 	void link_controller(const IPanelController &controller) override;
 
@@ -39,7 +42,7 @@ private:
 	QPushButton* __embShowButton__;
 	QPushButton* __extShowButton__;
 
-	QPushButton* __hideButton__;
+	QPushButton* __embButton__;
 	QProgressBar* __embProgress__;
 	QGroupBox* __embWidget__;
 	QLineEdit* __embSecretEdit__;
@@ -51,7 +54,7 @@ private:
 	QGroupBox* __extWidget__;
 	QProgressBar* __extProgress__;
 	QLineEdit* __extSecretEdit__;
-	QPushButton* __openExtSecertButton__;
+	QPushButton* __openExtSecretButton__;
 };
 
 

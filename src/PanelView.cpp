@@ -20,8 +20,8 @@ __player__(new QMediaPlayer()),
 __playButton__(new QPushButton("播放")), __openMediaButton__(new QPushButton("打开")), __embShowButton__(new QPushButton("信息嵌入")),
 __extShowButton__(new QPushButton("信息提取")), __embWidget__(new QGroupBox("嵌入面板")), __embProgress__(new QProgressBar),
 __embSecretEdit__(new QLineEdit), __embMediaEdit__(new QLineEdit), __openEmbSecretButton__(new QPushButton("..")),
-__openEmbMediaButton__(new QPushButton("..")), __hideButton__(new QPushButton("嵌入")),
-__extWidget__(new QGroupBox("提取面板")), __openExtSecertButton__(new QPushButton("..")), __extSecretEdit__(new QLineEdit),
+__openEmbMediaButton__(new QPushButton("..")), __embButton__(new QPushButton("嵌入")),
+__extWidget__(new QGroupBox("提取面板")), __openExtSecretButton__(new QPushButton("..")), __extSecretEdit__(new QLineEdit),
 __extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")) {
 	
 	setWindowTitle("视频信息隐藏系统");
@@ -31,7 +31,7 @@ __extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")) {
 	__extProgress__->setValue(0);
 	__openEmbSecretButton__->setFixedSize(22, 22);
 	__openEmbMediaButton__->setFixedSize(22, 22);
-	__openExtSecertButton__->setFixedSize(22, 22);
+	__openExtSecretButton__->setFixedSize(22, 22);
 	__init_layout__();
 }
 
@@ -77,7 +77,7 @@ void PanelView::__init_layout__(){
 		__embWidget__->setLayout(embStartLayout);
 		embStartLayout->addWidget(new QLabel("工作进度"));
 		embStartLayout->addWidget(__embProgress__);			// 进度条
-		embStartLayout->addWidget(__hideButton__);			// 按钮
+		embStartLayout->addWidget(__embButton__);			// 按钮
 	embLayout->addLayout(embSecLayout);
 	embLayout->addLayout(embMediaLayout);
 	embLayout->addLayout(embStartLayout);
@@ -90,7 +90,7 @@ void PanelView::__init_layout__(){
 		QHBoxLayout* extSecLayout = new QHBoxLayout;
 		extSecLayout->addWidget(new QLabel("秘密文件"));
 		extSecLayout->addWidget(__extSecretEdit__);
-		extSecLayout->addWidget(__openExtSecertButton__);
+		extSecLayout->addWidget(__openExtSecretButton__);
 		// 4.2).
 		QHBoxLayout* extStartLayout = new QHBoxLayout;
 		__extWidget__->setLayout(extStartLayout);
@@ -142,8 +142,15 @@ void PanelView::link_controller(const IPanelController &controller){
 
 	// 
 	connect(__openAlgorithmAction__, SIGNAL(triggered()), &controller, SLOT(open_algorithm_slot()));
-	connect(__openEmbSecretButton__, SIGNAL(clicked()), &controller, SLOT(open_secert_slot()));
-	connect(__hideButton__, SIGNAL(clicked()), &controller, SLOT(start_vih_slot()));
+	
+	connect(__openEmbSecretButton__, SIGNAL(clicked()), &controller, SLOT(open_emb_secert_slot()));
+	connect(__openEmbMediaButton__, SIGNAL(clicked()), &controller, SLOT(save_emb_media_slot()));
+	connect(__embButton__, SIGNAL(clicked()), &controller, SLOT(start_emb_slot()));
+
+
+	connect(__openExtSecretButton__, SIGNAL(clicked()), &controller, SLOT(save_ext_secert_slot()));
+	
+
 	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));
 }
 

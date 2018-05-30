@@ -41,6 +41,14 @@ void PanelView::play_slot(OperaStatus status){
 	}
 }
 
-void PanelView::open_secert_slot(const QString& path){
+void PanelView::open_emb_secert_slot(const QString& path){
 	__embSecretEdit__->setText(path);
+}
+
+void PanelView::save_emb_media_slot(const QString& path){
+	__embMediaEdit__->setText(path);
+}
+
+void PanelView::save_ext_secert_slot(const QString& path){
+	__extSecretEdit__->setText(path);
 }

@@ -49,15 +49,23 @@ void PanelController::open_algorithm_slot(){
 	__statusModel__->algo_idx(newidx);
 }
 
-void PanelController::open_secert_slot() {
-	QString path = QFileDialog::getOpenFileName(nullptr, "选择秘密文件", ".", "*.*");
+void PanelController::open_emb_secert_slot() {
+	QString path = QFileDialog::getOpenFileName(nullptr, "选择秘密文件", ".");
 	if (path.size() == 0){
 		return;
 	}
-	__statusModel__->secert_path(path);
+	__statusModel__->emb_secret_path(path);
 }
 
-void PanelController::start_vih_slot(){
+void PanelController::save_emb_media_slot(){
+	QString path = QFileDialog::getSaveFileName(nullptr, "载密视频保存路径");
+	if (path.size() == 0){
+		return;
+	}
+	__statusModel__->emb_media_path(path);
+}
+
+void PanelController::start_emb_slot(){
 	if (QMessageBox::information(nullptr, "视频信息隐藏系统", "开始信息隐藏", QMessageBox::Yes | QMessageBox::No)
 		== QMessageBox::No){
 		return;
@@ -69,6 +77,14 @@ void PanelController::start_vih_slot(){
 	else{		// 运行失败
 	
 	}
+}
+
+void PanelController::save_ext_secert_slot(){
+	QString path = QFileDialog::getSaveFileName(nullptr, "选择秘密文件保存路径", ".");
+	if (path.size() == 0){
+		return;
+	}
+	__statusModel__->ext_secret_path(path);
 }
 
 void PanelController::start_ext_slot() {
