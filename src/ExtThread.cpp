@@ -22,10 +22,12 @@ void ExtThread::run(){
 	stopped = false;
 	emit algoMessageSignal(DECODE, "============ 信息提取 ============", 1);
 	// 1).提取264
+	QString id = QString::number(qrand());
 	shared_ptr<Emedia> media = Emedia::generate(__mediaPath__.toStdString());
-	QString videowhere = QDir::currentPath() + "/tmp/tmp.264";
+	QString videowhere = QDir::currentPath() + "/tmp/" + id + ".264";
 	emit algoMessageSignal(DECODE, "读取多媒体中的视频文件...", 10);
 	media->xvideo(videowhere.toStdString());
+	if (stopped){ return; }
 	emit algoMessageSignal(DECODE, "【完成】提取多媒体的264文件", 50);
 
 	// 2).更新配置文件
@@ -34,7 +36,6 @@ void ExtThread::run(){
 
 	// 3).配置进程环境
 	QProcess p;
-	stopped = false;
 	p.setWorkingDirectory(__workspace__);
 	p.setEnvironment(__env__);
 	qRegisterMetaType<QProcess::ProcessError>("QProcess::ProcessError");
