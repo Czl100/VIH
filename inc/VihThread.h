@@ -10,6 +10,7 @@
 #include <memory>
 #include <QProcess>
 #include "PanelStatusModel.h"
+#include "defines.h"
 
 class AlgosModel;
 
@@ -20,7 +21,7 @@ public:
 	virtual ~VihThread(){}
 
 signals:
-	void algoMessageSignal(int exitCode, const QString &line, int val);
+	void algoMessageSignal(int type, const QString &line, int val);
 
 public slots:
 	void processErrorSlot(QProcess::ProcessError error);
@@ -30,6 +31,7 @@ public:
 
 protected:
 	volatile bool stopped;
+	OperaType __type__;
 };
 
 #endif

@@ -1,5 +1,6 @@
 Debug/
 3parts/
+ffmpeg
 *.opensdf
 *.sdf
 *.264

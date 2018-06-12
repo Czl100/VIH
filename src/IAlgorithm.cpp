@@ -2,16 +2,17 @@
 #pragma execution_character_set("utf-8")
 
 #include "IAlgorithm.h"
+#include <QDir>
 
 void IAlgorithm::loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args){
 	QHash<QString, QString> &params = __algoParams__[type];
 	QList<QString> &keys = params.keys();
 	if (type == ENCODE){
 		args.append("-d");
-		args.append("../encoder.cfg");
+		args.append("../../encoder.cfg");
 	}
 	else{
-		args.append("../decoder.cfg");
+		args.append("../../decoder.cfg");
 	}
 	for (int i = 0; i < keys.size(); i++){
 		if (keys[i] != "args"){

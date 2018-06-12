@@ -27,6 +27,7 @@ public:
 	static int encode_width();										// 编码的宽度
 	static int encode_height();										// 编码的高度
 	static int encode_frames();										// 编码的帧数
+	static int encode_fps();										// 编码的码率
 	static const QString input_file_path(OperaType type);			// 读出输入的文件路径
 	static const QString output_file_path(OperaType type);			// 读出输出的文件路径
 
@@ -36,6 +37,7 @@ public:
 	static void encode_width(int w);										// 编码的宽度
 	static void encode_height(int h);										// 编码的高度
 	static void encode_frames(const int frames);							// 设置编码帧数
+	static void encode_fps(const int fps);									// 设置码率
 	static void output_file_path(OperaType type, const QString &path);		// 设置输出的文件路径
 	static void input_file_path(OperaType type, const QString &path);		// 设置输入的文件路径
 

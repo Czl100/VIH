@@ -1,6 +1,6 @@
 ﻿
 #include "AlgoConf.h"
-
+#include <QDir>
 using namespace std;
 
 std::shared_ptr<Config> AlgoConf::s_cfg[2] = { nullptr, nullptr };
@@ -50,6 +50,9 @@ int AlgoConf::encode_height(){
 int AlgoConf::encode_frames(){
 	return s_cfg[ENCODE]->get("FramesToBeEncoded").toInt();
 }
+int AlgoConf::encode_fps(){
+	return s_cfg[ENCODE]->get("FrameRate").toInt();
+}
 const QString AlgoConf::input_file_path(OperaType type){
 	return s_cfg[type]->get("InputFile");
 }
@@ -74,9 +77,12 @@ void AlgoConf::encode_height(int h){
 void AlgoConf::encode_frames(const int frames){
 	s_cfg[ENCODE]->set("FramesToBeEncoded", QString::number(frames));
 }
+void AlgoConf::encode_fps(const int fps){
+	s_cfg[ENCODE]->set("FrameRate", QString::number(fps));
+}
 void AlgoConf::output_file_path(OperaType type, const QString &path){
-	s_cfg[type]->set("OutputFile", path);
+	s_cfg[type]->set("OutputFile", "\"" + path + "\"");
 }
 void AlgoConf::input_file_path(OperaType type, const QString &path){
-	s_cfg[type]->set("InputFile", path);
+	s_cfg[type]->set("InputFile", "\""+path+"\"");
 }

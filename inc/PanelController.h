@@ -6,6 +6,7 @@
 
 #include "IPanelController.h"
 #include "VihThreadRunner.h"
+#include "ConsoleWindow.h"
 
 class PanelController : public IPanelController{
 	Q_OBJECT
@@ -13,6 +14,7 @@ public:
 	PanelController();
 public slots :
 	void open_algorithm_slot() override;
+	void open_console_slot() override;
 
 	void open_video_slot() override;
 	void play_video_slot() override;
@@ -30,6 +32,7 @@ public slots :
 
 private:
 	VihThreadRunner __runner__;
+	ConsoleWindow __consoleWindow__;
 };
 
 #endif

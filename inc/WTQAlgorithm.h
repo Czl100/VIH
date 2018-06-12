@@ -6,9 +6,9 @@
 
 #include "Algorithm.h"
 
-class WTQInfo : public Algorithm{
+class WTQAlgorithm : public Algorithm{
 public:
-	WTQInfo(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
+	WTQAlgorithm(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
 public:
 	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
 		Algorithm::loadEnvAndArgs(type, env, args);

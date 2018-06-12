@@ -19,6 +19,9 @@ const QStringList AlgosModel::algos_list(){
 int AlgosModel::algo_idx(){
 	return __algoIdx__;
 }
+OperaType AlgosModel::opera_type(){
+	return __operaType__;
+}
 void AlgosModel::loadEnvAndArgs(QStringList &env, QStringList &args){
 	__algos__[__algoIdx__]->loadEnvAndArgs(__operaType__, env, args);
 }
@@ -31,4 +34,8 @@ void AlgosModel::add_algorithm(std::shared_ptr<IAlgorithm> algorithm){
 
 void AlgosModel::algo_idx(int idx){
 	__algoIdx__ = idx;
+}
+
+void AlgosModel::opera_type(OperaType type){
+	__operaType__ = type;
 }

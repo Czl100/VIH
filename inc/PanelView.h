@@ -28,6 +28,11 @@ public slots :
 
 	void save_ext_secert_slot(const QString& path) override;
 
+	void emb_progress_slot(int val) override;
+	void ext_progress_slot(int val) override;
+	void start_slot() override ;
+	void stop_slot() override ;
+
 	void link_controller(const IPanelController &controller) override;
 
 private:
@@ -35,7 +40,7 @@ private:
 
 private:
 	QAction * __openAlgorithmAction__;
-
+	QAction * __openConsoleAction__;
 	QMediaPlayer* __player__;
 	QPushButton* __playButton__;
 	QPushButton* __openMediaButton__;

@@ -18,10 +18,11 @@ public:
 	VihThreadRunner() :__status__(STOP){}
 
 signals:
-	void runnerSignal(int exitCode, const QString &line, int val);
+	void runnerSignal(int type, const QString &line, int val);
 
 public:
 	bool start(std::shared_ptr<VihThread> t);
+	OperaStatus status();
 	void stop();
 
 private:

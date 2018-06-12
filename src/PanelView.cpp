@@ -108,8 +108,10 @@ void PanelView::__init_layout__(){
 
 	// 6).菜单栏
 	__openAlgorithmAction__ = new QAction("算法选择", this);
+	__openConsoleAction__ = new QAction("调试台", this);
 	QMenu *toolMenu = menuBar()->addMenu("工具箱");
 	toolMenu->addAction(__openAlgorithmAction__);
+	toolMenu->addAction(__openConsoleAction__);
 }
 
 void PanelView::link_controller(const IPanelController &controller){
@@ -142,6 +144,7 @@ void PanelView::link_controller(const IPanelController &controller){
 
 	// 
 	connect(__openAlgorithmAction__, SIGNAL(triggered()), &controller, SLOT(open_algorithm_slot()));
+	connect(__openConsoleAction__, SIGNAL(triggered()), &controller, SLOT(open_console_slot()));
 	
 	connect(__openEmbSecretButton__, SIGNAL(clicked()), &controller, SLOT(open_emb_secert_slot()));
 	connect(__openEmbMediaButton__, SIGNAL(clicked()), &controller, SLOT(save_emb_media_slot()));

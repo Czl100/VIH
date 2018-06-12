@@ -35,6 +35,7 @@ public slots :
 
 
 	virtual void open_algorithm_slot() = 0;		// 选择算法
+	virtual void open_console_slot() = 0;		// 打开调试台
 
 protected:
 	std::shared_ptr<IPanelView> __view__;

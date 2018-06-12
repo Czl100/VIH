@@ -6,9 +6,9 @@
 
 #include "Algorithm.h"
 
-class LHHInfo : public Algorithm{
+class LHHAlgorithm : public Algorithm{
 public:
-	LHHInfo(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
+	LHHAlgorithm(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
 public:
 	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
 		Algorithm::loadEnvAndArgs(type, env, args);

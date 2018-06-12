@@ -7,6 +7,7 @@
 #include <QVideoWidget> 
 #include <QPushButton>
 #include <QLineEdit>
+#include <QProgressBar>
 
 void PanelView::open_media_slot(const QString& path){
 	if (path.size()){
@@ -51,4 +52,40 @@ void PanelView::save_emb_media_slot(const QString& path){
 
 void PanelView::save_ext_secert_slot(const QString& path){
 	__extSecretEdit__->setText(path);
+}
+
+void  PanelView::emb_progress_slot(int val){
+	__embProgress__->setValue(val);
+}
+
+void  PanelView::ext_progress_slot(int val){
+	__extProgress__->setValue(val);
+}
+
+void PanelView::start_slot(){
+	__embButton__->setText("停止");
+	__extButton__->setText("停止");
+	__openEmbSecretButton__->setDisabled(true);
+	__openEmbMediaButton__->setDisabled(true);
+	__openExtSecretButton__->setDisabled(true);
+	__embShowButton__->setDisabled(true);
+	__extShowButton__->setDisabled(true);
+	__openMediaButton__->setDisabled(true);
+	__extSecretEdit__->setDisabled(true);
+	__embMediaEdit__->setDisabled(true);
+	__embSecretEdit__->setDisabled(true);
+}
+
+void PanelView::stop_slot(){
+	__embButton__->setText("嵌入");
+	__extButton__->setText("提取");
+	__openEmbSecretButton__->setDisabled(false);
+	__openEmbMediaButton__->setDisabled(false);
+	__openExtSecretButton__->setDisabled(false);
+	__embShowButton__->setDisabled(false);
+	__extShowButton__->setDisabled(false);
+	__openMediaButton__->setDisabled(false);
+	__extSecretEdit__->setDisabled(false);
+	__embMediaEdit__->setDisabled(false);
+	__embSecretEdit__->setDisabled(false);
 }

@@ -25,6 +25,10 @@ signals :
 	void open_emb_secret_signal(const QString& path);
 	void save_emb_media_signal(const QString& path);
 	void save_ext_secret_signal(const QString& path);
+	void emb_progress_signal(int val);
+	void ext_progress_signal(int val);
+	void start_signal();
+	void stop_signal();
 
 // 初始化
 public:
@@ -41,6 +45,10 @@ public:
 	void emb_secret_path(const QString& path);
 	void emb_media_path(const QString& path);
 	void ext_secret_path(const QString& path);
+	void emb_progress(int val);
+	void ext_progress(int val);
+	void start();
+	void stop();
 
 // 读函数
 public:

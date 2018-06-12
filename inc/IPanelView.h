@@ -31,6 +31,10 @@ public slots :
 	virtual void open_emb_secert_slot(const QString& path) = 0;
 	virtual void save_emb_media_slot(const QString& path) = 0;
 	virtual void save_ext_secert_slot(const QString& path) = 0;
+	virtual void emb_progress_slot(int val) = 0;
+	virtual void ext_progress_slot(int val) = 0;
+	virtual void start_slot() = 0;
+	virtual void stop_slot() = 0;
 };
 
 #endif

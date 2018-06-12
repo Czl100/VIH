@@ -21,12 +21,14 @@ public:
 	QString exe_path();
 	const QStringList algos_list();
 	int algo_idx();
+	OperaType opera_type();
 	void loadEnvAndArgs(QStringList &env, QStringList &args);
 
 // 写函数
 public:
 	void add_algorithm(std::shared_ptr<IAlgorithm> algorithm);
 	void algo_idx(int idx);
+	void opera_type(OperaType type);
 
 protected:
 	QList<std::shared_ptr<IAlgorithm>> __algos__;
