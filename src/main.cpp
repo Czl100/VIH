@@ -9,6 +9,8 @@
 #include <memory>
 #include "AlgoConf.h"
 #include "LHHAlgorithm.h"
+#include "WTQAlgorithm.h"
+
 using namespace std;
 
 void loadModel(shared_ptr<PanelStatusModel> m);
@@ -32,7 +34,14 @@ int main(int argc, char *argv[])
 }
 
 void loadModel(shared_ptr<PanelStatusModel> m){
-	AlgoConf::open_algorithm_config("algorithms/");
-	m->add_algorithm(shared_ptr<Algorithm>(new LHHAlgorithm("algorithms/", "test1")));
-	m->add_algorithm(shared_ptr<Algorithm>(new LHHAlgorithm("algorithms/", "test2")));
+	QString algorithmsRootDir = "algorithms/";
+	AlgoConf::open_algorithm_config(algorithmsRootDir);
+	// LHH
+	m->add_algorithm(shared_ptr<Algorithm>(new LHHAlgorithm(algorithmsRootDir, "三维低码率增长信息隐藏")));
+	m->add_algorithm(shared_ptr<Algorithm>(new LHHAlgorithm(algorithmsRootDir, "基于循环码的信息隐藏")));
+	m->add_algorithm(shared_ptr<Algorithm>(new LHHAlgorithm(algorithmsRootDir, "参考像素多分类的QDCT域信息隐藏")));
+	// WTQ
+	m->add_algorithm(shared_ptr<Algorithm>(new WTQAlgorithm(algorithmsRootDir, "低码率增长信息隐藏")));
+	m->add_algorithm(shared_ptr<Algorithm>(new WTQAlgorithm(algorithmsRootDir, "适应拖尾系数信息隐藏")));
+	m->add_algorithm(shared_ptr<Algorithm>(new WTQAlgorithm(algorithmsRootDir, "三元码信息隐藏")));
 }

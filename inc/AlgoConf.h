@@ -30,6 +30,8 @@ public:
 	static int encode_fps();										// 编码的码率
 	static const QString input_file_path(OperaType type);			// 读出输入的文件路径
 	static const QString output_file_path(OperaType type);			// 读出输出的文件路径
+	static const QString emb_secret_path();
+	static const QString ext_secret_path();
 
 	// 写入
 	static void set(const QString &key, const QString& val, OperaType type);
@@ -40,12 +42,16 @@ public:
 	static void encode_fps(const int fps);									// 设置码率
 	static void output_file_path(OperaType type, const QString &path);		// 设置输出的文件路径
 	static void input_file_path(OperaType type, const QString &path);		// 设置输入的文件路径
+	static void emb_secret_path(const QString& path);
+	static void ext_secret_path(const QString& path);
 
 protected:
 	static std::shared_ptr<Config> s_cfg[2];			// 0-编码的配置文件， 1-解码得配置文件
 	static QString s_encoderCfgPath;
 	static QString s_decoderCfgPath;
 	static bool s_isopenAlgoConfig;
+	static QString s_embSecretPath;
+	static QString s_extSecretPath;
 };
 
 #endif

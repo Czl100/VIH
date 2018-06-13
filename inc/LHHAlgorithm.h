@@ -4,6 +4,7 @@
 #ifndef _LHH_ALGORITHM_H
 #define _LHH_ALGORITHM_H
 
+#include "AlgoConf.h"
 #include "Algorithm.h"
 
 class LHHAlgorithm : public Algorithm{
@@ -12,7 +13,7 @@ public:
 public:
 	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
 		Algorithm::loadEnvAndArgs(type, env, args);
-		type == ENCODE ? args.append(__secertFilePath__[0]) : args.append(__secertFilePath__[1]);
+		type == ENCODE ? args.append(AlgoConf::emb_secret_path()) : args.append(AlgoConf::ext_secret_path());
 	}
 };
 

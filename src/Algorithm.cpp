@@ -23,14 +23,8 @@ const QString Algorithm::exe_path(OperaType type) {
 const QHash<QString, QString> &Algorithm::param_map(OperaType type) {
 	return __algoParams__[type];
 }
-const QString Algorithm::secert_file_path(OperaType type) {
-	return __secertFilePath__[type];
-}
 
 // ================================ 写入 ================================
-void Algorithm::secert_file_path(OperaType type, const QString &path) {
-	__secertFilePath__[type] = path;
-}
 void Algorithm::add_param(OperaType type, const QString &key, const QString& val){
 	__algoParams__[type][key] = val;
 }

@@ -7,6 +7,8 @@ std::shared_ptr<Config> AlgoConf::s_cfg[2] = { nullptr, nullptr };
 QString AlgoConf::s_encoderCfgPath = "";
 QString AlgoConf::s_decoderCfgPath = "";
 bool AlgoConf::s_isopenAlgoConfig = false;
+QString AlgoConf::s_embSecretPath = "";
+QString AlgoConf::s_extSecretPath = "";
 
 void AlgoConf::open_algorithm_config(const QString &algorithmsDir){
 	s_encoderCfgPath = algorithmsDir + "/encoder.cfg";
@@ -59,6 +61,12 @@ const QString AlgoConf::input_file_path(OperaType type){
 const QString AlgoConf::output_file_path(OperaType type){
 	return s_cfg[type]->get("OutputFile");
 }
+const QString AlgoConf::emb_secret_path(){
+	return s_embSecretPath;
+}
+const QString AlgoConf::ext_secret_path(){
+	return s_extSecretPath;
+}
 
 // ================================ 写入 ================================
 void AlgoConf::set(const QString &key, const QString& val, OperaType type){
@@ -95,4 +103,12 @@ void AlgoConf::input_file_path(OperaType type, const QString &path){
 	else{
 		s_cfg[type]->set("InputFile", path);
 	}
+}
+
+void AlgoConf::emb_secret_path(const QString& path){
+	s_embSecretPath = path;
+}
+
+void AlgoConf::ext_secret_path(const QString& path){
+	s_extSecretPath = path;
 }

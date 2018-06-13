@@ -32,8 +32,6 @@ public:
 	virtual const QString decoder_path() = 0;							// 获得算法解码器路径
 	virtual const QString exe_path(OperaType type) = 0;					// 获得可执行文件路径
 	virtual const QHash<QString, QString> &param_map(OperaType type) = 0;		// 获得输入参数的mapper
-	virtual const QString secert_file_path(OperaType type) = 0;					// 返回秘密文件路径
-	virtual void secert_file_path(OperaType type, const QString &path) = 0;		// 设置秘密文件路径
 
 	virtual void add_param(OperaType type, const QString &key, const QString& val) = 0;		// 添加参数对
 	virtual void del_param(OperaType type, const QString &key) = 0;							// 删除参数对
@@ -50,7 +48,6 @@ protected:
 	QString __decoderPath__;
 
 	QHash<QString, QString> __algoParams__[2];	// 0-编码的参数模型， 1-解码的参数模型
-	QString __secertFilePath__[2];
 };
 
 #endif

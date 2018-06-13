@@ -1,6 +1,6 @@
 #include "PanelStatusModel.h"
 #include "IPanelView.h"
-
+#include "AlgoConf.h"
 #include <QList>
 
 void PanelStatusModel::set_view(std::shared_ptr<IPanelView> v){
@@ -67,7 +67,7 @@ void PanelStatusModel::emb_secret_path(const QString& secertPath){
 	// 路径不同则重新打开媒体
 	if (__embSecretPath__.compare(secertPath)){
 		__embSecretPath__ = secertPath;
-		__algos__[__algoIdx__]->secert_file_path(ENCODE, __embSecretPath__);
+		AlgoConf::emb_secret_path(__embSecretPath__);
 		emit open_emb_secret_signal(__embSecretPath__);
 	}
 }
@@ -83,7 +83,7 @@ void PanelStatusModel::emb_media_path(const QString& path){
 void PanelStatusModel::ext_secret_path(const QString& path){
 	if (__extSecretPath__.compare(path)){
 		__extSecretPath__ = path;
-		__algos__[__algoIdx__]->secert_file_path(DECODE, __extSecretPath__);
+		AlgoConf::ext_secret_path(__extSecretPath__);
 		emit save_ext_secret_signal(__extSecretPath__);
 	}
 }

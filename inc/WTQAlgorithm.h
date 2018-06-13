@@ -4,6 +4,7 @@
 #ifndef _WTQ_ALGORITHM_H
 #define _WTQ_ALGORITHM_H
 
+#include "AlgoConf.h"
 #include "Algorithm.h"
 
 class WTQAlgorithm : public Algorithm{
@@ -13,17 +14,18 @@ public:
 	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
 		Algorithm::loadEnvAndArgs(type, env, args);
 		if (type == ENCODE){
-			int idx1 = __secertFilePath__[0].lastIndexOf("/");
-			int idx2 = __secertFilePath__[0].lastIndexOf("\\");
+			
+			int idx1 = AlgoConf::emb_secret_path().lastIndexOf("/");
+			int idx2 = AlgoConf::emb_secret_path().lastIndexOf("\\");
 			int idx = idx1 > idx2 ? idx1 : idx2;
-			QString fileName = __secertFilePath__[0].right(__secertFilePath__[0].size() - idx - 1);
+			QString fileName = AlgoConf::emb_secret_path().right(AlgoConf::emb_secret_path().size() - idx - 1);
 			args.append(fileName);
-			args.append(__secertFilePath__[0]);
+			args.append(AlgoConf::emb_secret_path());
 			args.append("4");
 		}
 		else{
 			args.append("4");
-			args.append(__secertFilePath__[1]);
+			args.append(AlgoConf::ext_secret_path());
 		}
 	}
 

@@ -18,9 +18,6 @@ public:
 	const QString decoder_path() override;
 	const QString exe_path(OperaType type) override;
 	const QHash<QString, QString> &param_map(OperaType type) override;
-	const QString secert_file_path(OperaType type) override;
-
-	void secert_file_path(OperaType type, const QString &path) override;
 
 	void add_param(OperaType type, const QString &key, const QString& val) override;
 	void del_param(OperaType type, const QString &key) override;
