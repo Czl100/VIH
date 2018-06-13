@@ -1,0 +1,14 @@
+demoli1一种基于循环码的H.264视频信息隐藏算法的应用程序
+本程序是：
+一种基于循环码的H.264视频信息隐藏算法的应用程序
+
+写的文档（修改）
+
+理论错误修改
+已标红
+重点看程序
+程序部分都是正确的
+
+在workpsace中用：
+编码 ../lencod.exe -d ../encoder.cfg secert.txt
+解码 ../ldecod.exe extract.txt

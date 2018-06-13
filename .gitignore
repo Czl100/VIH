@@ -1,4 +1,5 @@
 Debug/
+Release/
 3parts/
 ffmpeg
 *.opensdf
