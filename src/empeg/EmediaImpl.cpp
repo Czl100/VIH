@@ -4,6 +4,9 @@
 #include<fstream>
 #include<hash_map>
 #include<windows.h>
+
+#include <stdint.h>
+#include<time.h>
 using namespace std;
 //--ffmpeg库和头文件
 #ifndef _FFMPEG_H
@@ -16,6 +19,21 @@ extern "C"{
 }
 #endif
 
+int av_usleep(unsigned usec)
+{
+#if HAVE_NANOSLEEP
+	struct timespec ts = { usec / 1000000, usec % 1000000 * 1000 };
+	while (nanosleep(&ts, &ts) < 0 && errno == EINTR);
+	return 0;
+#elif HAVE_USLEEP
+	return usleep(usec);
+#elif HAVE_SLEEP
+	Sleep(usec / 1000);
+	return 0;
+#else
+	return AVERROR(ENOSYS);
+#endif
+}
 
 EmediaImpl::EmediaImpl(const std::string& path){
 	av_register_all();								//初始化封装												
@@ -484,8 +502,7 @@ bool EmediaImpl::xaudio(const std::string& path, bool isDebug){
 
 //--获取yuv
 bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
-	//-将解码后的frame以YUV240的格式写入文件
-	//	AVFrame* pFrame;
+	//-将解码后的frame以YUV240的格式写入文件	
 	ofstream ofile(path, ios::binary);	//yuv文件
 	if (!ofile){
 		throw OpenException("open file error call ofstream ofile", path);
@@ -528,9 +545,11 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 	struct SwsContext *img_convert_ctx = NULL;
 	img_convert_ctx = sws_getContext(pCodecCtx->width, pCodecCtx->height, pCodecCtx->pix_fmt, pCodecCtx->width, pCodecCtx->height, AV_PIX_FMT_YUV420P, SWS_BICUBIC, NULL, NULL, NULL);
 	int nn = 0;
+
+	//--读取frame，并解码
 	while (1)
 	{
-		AVPacket* pkt = av_packet_alloc();
+		AVPacket* pkt = av_packet_alloc();		
 		AVFrame* frame = av_frame_alloc();
 		
 		int err = av_read_frame(_formatCtx, pkt);
@@ -543,25 +562,34 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 		if (pkt->stream_index != _videoStream){
 			av_packet_unref(pkt);				//释放空间 
 			continue;
-		}
-
-		//_decode(pkt, *frame);
+		}		
 		int re = avcodec_send_packet(_formatCtx->streams[pkt->stream_index]->codec, pkt);	//bug
-		//int re = avcodec_send_packet(_encodecCtx, pkt);										//涉及解码器
+		//int re = avcodec_send_packet(_encodecCtx, pkt);							
+		av_packet_unref(pkt);	
 		if (re != 0){
 			char buf[512] = { 0 };
 			av_strerror(re, buf, sizeof(buf)-1);
 			if(isDebug)		std::cout << "avcodec_send_packet error! :" << buf << std::endl;
 			continue;
-		}
-		/*if (re != 0){
-			throw DecodeExceptionPara("avcodec_send_packet error");
-		}*/
+		}		
 		
-		while(true){		//从线程中获取解码接口,一次send可能对应多次receive
-			re = avcodec_receive_frame(_formatCtx->streams[pkt->stream_index]->codec, frame);			//#define EAGAIN          11
-			if (re != 0) break;			
-
+		//开始解码,一次send可能对应多次receive
+		while(true)		
+		{		
+			//avcodec_receive_packet
+			re = avcodec_receive_frame(_formatCtx->streams[pkt->stream_index]->codec, frame);			//#define EAGAIN       11						
+			if (re == AVERROR(EAGAIN)){
+				//ff_yield();
+				//continue;
+				//av_usleep(100);
+				//Sleep(10000);
+				re = 0;
+				if (isDebug)	std::cout << "call avcodec_receive_frame return AVERROR(EAGAIN))\n";
+				//avcodec_flush_buffers(_formatCtx->streams[pkt->stream_index]->codec);								
+				break;
+			}
+			if (re != 0)	break;
+			
 			sws_scale(img_convert_ctx, (const uint8_t* const*)frame->data, frame->linesize, 0,
 				pCodecCtx->height, pFrameYUV->data, pFrameYUV->linesize);
 			//写YUV
@@ -570,9 +598,12 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 			ofile.write((char*)pFrameYUV->data[2], (pCodecCtx->width)*(pCodecCtx->height) / 4);			
 			if (isDebug)	std::cout << nn++ << std::endl; 
 		}		
+
 		av_packet_unref(pkt);	//释放空间 		
 		Sleep(25);
 	}
+
+
 	ofile.clear();
 	avformat_close_input(&_formatCtx);
 	//av_seek_frame(_formatCtx, _videoStream, _formatCtx->streams[_videoStream]->start_time, 0);
@@ -642,8 +673,9 @@ int64_t EmediaImpl::frames(){
 	if (!_formatCtx){
 		_openFormatCtx();
 	}
-
+	
 	//nb_frames是不是帧数？？
+	int64_t frame_t = (fps()*(_formatCtx->duration / AV_TIME_BASE));
 	return _formatCtx->streams[_videoStream]->nb_frames != 0 ? _formatCtx->streams[_videoStream]->nb_frames:(fps()*(_formatCtx->duration / AV_TIME_BASE));
 }
 
@@ -664,4 +696,11 @@ EmediaImpl::VideoType EmediaImpl::video_type(){
 		_openFormatCtx();
 	}
 	return NONE;
+}
+
+bool EmediaImpl::audio_exists(){
+	if (!_formatCtx){
+		_openFormatCtx();
+	}
+	return _audioStream > -1 ? true : false;
 }

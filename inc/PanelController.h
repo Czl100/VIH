@@ -26,6 +26,10 @@ public slots :
 
 	void save_ext_secert_slot() override;
 	void start_ext_slot() override;
+
+	void emb_media_change_slot(const QString& line) override;
+	void ext_secret_change_slot(const QString& line) override;
+	void emb_secret_change_slot(const QString& line) override;
 	
 
 	void runnerSlot(int exitCode, const QString &line, int val);

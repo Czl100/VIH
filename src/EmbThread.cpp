@@ -34,10 +34,18 @@ void EmbThread::run(){
 	int frames = media->frames()-1;
 	double fps = media->fps();
 	emit algoMessageSignal(ENCODE, "开始提取音频文件...", 5);
-//	media->xaudio(audiowhere.toStdString());
-	if (stopped){ return; }
+	if (media->audio_exists()){
+		media->xaudio(audiowhere.toStdString());
+		if (stopped){ return; }
+		emit algoMessageSignal(ENCODE, "【完成】音频文件提取", 10);
+	}
+	else{
+		emit algoMessageSignal(ENCODE, "音频文件不存在", 10);
+		if (stopped){ return; }
+	}
 	emit algoMessageSignal(ENCODE, "开始提取YUV...", 10);
 	media->xyuv(yuvwhere.toStdString());
+	emit algoMessageSignal(ENCODE, "【结束】YUV提取", 40);
 	if (stopped){ return; }
 	high = media->high();
 
@@ -86,10 +94,15 @@ void EmbThread::run(){
 		}
 		else{
 			// 5). 将264和音频结合在一起
+			emit algoMessageSignal(ENCODE, "【结束】嵌入完成", 90);
 			emit algoMessageSignal(ENCODE, "开始封装多媒体文件...", 90);
-			//Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString(), audiowhere.toStdString());
-			Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString());
-			emit algoMessageSignal(ENCODE, "【结束】", 99);
+			if (media->audio_exists()){
+				Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString(), audiowhere.toStdString());
+			}
+			else{
+				Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString());
+			}
+			emit algoMessageSignal(ENCODE, "【完成】多媒体文件封装", 99);
 			emit algoMessageSignal(ENCODE, "信息隐藏完成", 100);
 		}
 	}

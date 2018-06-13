@@ -43,9 +43,9 @@ public:
 public:
 	void media_path(const QString& path);
 	void play_status(OperaStatus status);
-	void emb_secret_path(const QString& path);
-	void emb_media_path(const QString& path);
-	void ext_secret_path(const QString& path);
+	void emb_secret_path(const QString& path, bool sync = true);
+	void emb_media_path(const QString& path, bool sync = true);
+	void ext_secret_path(const QString& path, bool sync = true);
 	void emb_progress(int val);
 	void ext_progress(int val);
 	void set_algo_idx(int idx);

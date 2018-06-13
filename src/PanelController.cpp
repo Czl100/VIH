@@ -15,7 +15,7 @@
 using namespace std;
 
 PanelController::PanelController(){
-	connect(&__runner__, &VihThreadRunner::runnerSignal, this, [=](int type, const QString &line, int val){
+	/*connect(&__runner__, &VihThreadRunner::runnerSignal, this, [=](int type, const QString &line, int val){
 		if (type == ENCODE){
 			__statusModel__->emb_progress(val);
 		}
@@ -33,7 +33,8 @@ PanelController::PanelController(){
 			QMessageBox::information(nullptr, "视频信息隐藏系统", line, QMessageBox::Yes);
 			__statusModel__->stop();
 		}
-	});
+	});*/
+	connect(&__runner__, SIGNAL(runnerSignal(int, const QString&, int)), this, SLOT(runnerSlot(int, const QString&, int)));
 }
 
 void PanelController::open_video_slot(){
@@ -157,4 +158,34 @@ void PanelController::start_ext_slot() {
 	
 }
 
-void PanelController::runnerSlot(int exitCode, const QString &line, int val){}
+void PanelController::runnerSlot(int type, const QString &line, int val){
+	if (type == ENCODE){
+		__statusModel__->emb_progress(val);
+	}
+	else if (type == DECODE){
+		__statusModel__->ext_progress(val);
+	}
+	else{
+		__statusModel__->emb_progress(val);
+		__statusModel__->ext_progress(val);
+	}
+	if (!__consoleWindow__.isHidden()){
+		__consoleWindow__.append(line);
+	}
+	if (val == 100){
+		QMessageBox::information(nullptr, "视频信息隐藏系统", line, QMessageBox::Yes);
+		__statusModel__->stop();
+	}
+}
+
+void PanelController::ext_secret_change_slot(const QString& line){
+	__statusModel__->ext_secret_path(line, false);
+}
+
+void PanelController::emb_secret_change_slot(const QString& line){
+	__statusModel__->emb_secret_path(line, false);
+}
+
+void PanelController::emb_media_change_slot(const QString& line) {
+	__statusModel__->emb_media_path(line, false);
+}

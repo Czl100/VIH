@@ -63,28 +63,34 @@ void PanelStatusModel::play_status(OperaStatus status) {
 	}
 }
 
-void PanelStatusModel::emb_secret_path(const QString& secertPath){
+void PanelStatusModel::emb_secret_path(const QString& secertPath, bool sync){
 	// 路径不同则重新打开媒体
 	if (__embSecretPath__.compare(secertPath)){
 		__embSecretPath__ = secertPath;
 		AlgoConf::emb_secret_path(__embSecretPath__);
-		emit open_emb_secret_signal(__embSecretPath__);
+		if (sync){
+			emit open_emb_secret_signal(__embSecretPath__);
+		}
 	}
 }
 
-void PanelStatusModel::emb_media_path(const QString& path){
+void PanelStatusModel::emb_media_path(const QString& path, bool sync){
 	// 路径不同则重新打开媒体
 	if (__embMediaPath__.compare(path)){
 		__embMediaPath__ = path;
-		emit save_emb_media_signal(__embMediaPath__);
+		if (sync){
+			emit save_emb_media_signal(__embMediaPath__);
+		}
 	}
 }
 
-void PanelStatusModel::ext_secret_path(const QString& path){
+void PanelStatusModel::ext_secret_path(const QString& path, bool sync){
 	if (__extSecretPath__.compare(path)){
 		__extSecretPath__ = path;
 		AlgoConf::ext_secret_path(__extSecretPath__);
-		emit save_ext_secret_signal(__extSecretPath__);
+		if (sync){
+			emit save_ext_secret_signal(__extSecretPath__);
+		}
 	}
 }
 

@@ -37,6 +37,10 @@ public slots :
 	virtual void open_algorithm_slot() = 0;		// 选择算法
 	virtual void open_console_slot() = 0;		// 打开调试台
 
+	virtual void emb_media_change_slot(const QString& line) = 0;
+	virtual void ext_secret_change_slot(const QString& line) = 0;
+	virtual void emb_secret_change_slot(const QString& line) = 0;
+
 protected:
 	std::shared_ptr<IPanelView> __view__;
 	std::shared_ptr<PanelStatusModel> __statusModel__;

@@ -14,6 +14,7 @@
 #include <QtMultimedia/QMediaPlayer>
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <QGroupBox>
+#include <QDebug>
 
 PanelView::PanelView(QWidget *parent) : IPanelView(parent),
 __player__(new QMediaPlayer()), 
@@ -147,14 +148,18 @@ void PanelView::link_controller(const IPanelController &controller){
 	// 
 	connect(__openAlgorithmAction__, SIGNAL(triggered()), &controller, SLOT(open_algorithm_slot()));
 	connect(__openConsoleAction__, SIGNAL(triggered()), &controller, SLOT(open_console_slot()));
-	
+
 	connect(__openEmbSecretButton__, SIGNAL(clicked()), &controller, SLOT(open_emb_secert_slot()));
 	connect(__openEmbMediaButton__, SIGNAL(clicked()), &controller, SLOT(save_emb_media_slot()));
 	connect(__embButton__, SIGNAL(clicked()), &controller, SLOT(start_emb_slot()));
 
 
 	connect(__openExtSecretButton__, SIGNAL(clicked()), &controller, SLOT(save_ext_secert_slot()));
-	
+
 
 	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));
+
+	connect(__embSecretEdit__, SIGNAL(textChanged(const QString&)), &controller, SLOT(emb_secret_change_slot(const QString&)));
+	connect(__embMediaEdit__, SIGNAL(textChanged(const QString&)), &controller, SLOT(emb_media_change_slot(const QString&)));
+	connect(__extSecretEdit__, SIGNAL(textChanged(const QString&)), &controller, SLOT(ext_secret_change_slot(const QString&)));
 }
