@@ -57,7 +57,7 @@ bool EmediaImpl::_open_(){
 	//--找视频流、音频流标准
 	_videoStream = av_find_best_stream(_formatCtx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
 	_audioStream = av_find_best_stream(_formatCtx, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
-	if (_videoStream + _audioStream<1)	throw StreamExceptionPara("avformat_find_stream_info error file is:" + _filePath);
+	if ((_formatCtx->nb_streams>1) && (_videoStream + _audioStream<1))	throw StreamExceptionPara("avformat_find_stream_info error file is:" + _filePath);
 
 	
 	return true;
@@ -109,8 +109,8 @@ void EmediaImpl::creatStream(){
 
 bool EmediaImpl::xvideo(const std::string& path,bool isDebug){
 	std::string outFileType = (path.substr(path.find(".") + 1));	//获取文件类型
-	if ( outFileType != "264" )
-		throw OpenException("output file error", path);
+	/*if ( outFileType != "h264" )
+		throw OpenException("output file error", path);*/
 	
 	AVStream		*in_stream, *out_stream;
 	AVPacket		pkt;
@@ -123,8 +123,13 @@ bool EmediaImpl::xvideo(const std::string& path,bool isDebug){
 	if (!_formatCtx){
 		_openFormatCtx();
 	}
-	avformat_alloc_output_context2(&_ofmt_ctx_v, NULL, NULL, out_filename_v);
-	if (!_ofmt_ctx_v) {
+	
+	AVCodec *vcodec = avcodec_find_decoder(_formatCtx->streams[_videoStream]->codecpar->codec_id);
+	avformat_alloc_output_context2(&_ofmt_ctx_v, NULL, vcodec->name, NULL);			// vcodec->name
+	if (!_ofmt_ctx_v)
+		avformat_alloc_output_context2(&_ofmt_ctx_v, NULL, NULL, out_filename_v);			// vcodec->name
+	if (!_ofmt_ctx_v)
+	{
 		std::cout<<"Could not create output context\n";
 		_ret = AVERROR_UNKNOWN;		
 		throw OpenException("call avformat_alloc_output_context2 error", _ofmt_ctx_v);
@@ -196,6 +201,8 @@ bool EmediaImpl::xvideo(const std::string& path,bool isDebug){
 	av_write_trailer(_ofmt_ctx_v);
 	
 	avformat_close_input(&_formatCtx);
+	//av_seek_frame(_formatCtx, _videoStream, _formatCtx->streams[_videoStream]->start_time, AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_FRAME);
+	//av_seek_frame(_formatCtx, _audioStream, _formatCtx->streams[_audioStream]->start_time, AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_FRAME);
 	return true;
 }
 
@@ -340,11 +347,14 @@ bool EmediaImpl::demuxer(const std::string& videoPath, const std::string& audioP
 	avformat_free_context(_ofmt_ctx_v);*/
 
 	if (ret < 0 && ret != AVERROR_EOF) {
-		printf("Error occurred.\n");
+		std::cout<<"Error occurred.\n";
 		return false;
 	}	
 
 	avformat_close_input(&_formatCtx);
+	//av_seek_frame(ic, videoStream, pos, AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_FRAME);
+	//av_seek_frame(_formatCtx, _videoStream, _formatCtx->streams[_videoStream]->start_time, 0);
+	//av_seek_frame(_formatCtx, _audioStream, _formatCtx->streams[_audioStream]->start_time, 0);
 	return true;
 }
 
@@ -373,7 +383,11 @@ bool EmediaImpl::xaudio(const std::string& path, bool isDebug){
 	}	
 
 	in_stream = _formatCtx->streams[_audioStream];
+
+	AVCodec *vcodec = avcodec_find_decoder(_formatCtx->streams[_audioStream]->codecpar->codec_id);
+	//avformat_alloc_output_context2初始化一个用于输出的AVFormatContext结构体		vcodec->name
 	avformat_alloc_output_context2(&_ofmt_ctx_a, NULL, NULL, out_filename_a);
+	//avformat_alloc_output_context2(&_ofmt_ctx_a, NULL, NULL, out_filename_a);
 	if (!_ofmt_ctx_a) {
 		//std::cout<<"Could not create output context\n";
 		ret = AVERROR_UNKNOWN;
@@ -457,12 +471,14 @@ bool EmediaImpl::xaudio(const std::string& path, bool isDebug){
 	avformat_free_context(_ofmt_ctx_a);*/
 
 	if (ret < 0 && ret != AVERROR_EOF) {
-		printf("Error occurred.\n");
+		if(isDebug)	std::cout<<"Error occurred.\n";
 		return false;
 	}
 
 	avformat_close_input(&_formatCtx);
-	cout << "-----xaudio end--------\n";
+	//av_seek_frame(_formatCtx, _videoStream, _formatCtx->streams[_videoStream]->start_time, 0);
+	//av_seek_frame(_formatCtx, _audioStream, _formatCtx->streams[_audioStream]->start_time, 0);
+	if(isDebug)	cout << "-----xaudio end--------\n";
 	return true;
 }
 
@@ -492,8 +508,7 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 			int err = avcodec_open2(_encodecCtx, codec, NULL);
 			if (err != 0){
 				char buf[1024] = { 0 };
-				av_strerror(err, buf, sizeof(buf));
-				//cout << buf << endl;	return 0;
+				av_strerror(err, buf, sizeof(buf));				
 				throw OpenException(buf);
 			}			
 		}
@@ -536,7 +551,7 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 		if (re != 0){
 			char buf[512] = { 0 };
 			av_strerror(re, buf, sizeof(buf)-1);
-			if(isDebug)	std::cout << "avcodec_send_packet error! :" << buf << std::endl;
+			if(isDebug)		std::cout << "avcodec_send_packet error! :" << buf << std::endl;
 			continue;
 		}
 		/*if (re != 0){
@@ -560,6 +575,8 @@ bool EmediaImpl::xyuv(const std::string& path,bool isDebug){
 	}
 	ofile.clear();
 	avformat_close_input(&_formatCtx);
+	//av_seek_frame(_formatCtx, _videoStream, _formatCtx->streams[_videoStream]->start_time, 0);
+	//av_seek_frame(_formatCtx, _audioStream, _formatCtx->streams[_audioStream]->start_time, 0);
 	return true;
 }
 
@@ -600,7 +617,6 @@ EmediaImpl::~EmediaImpl(){
 
 	avformat_free_context(_ofmt_ctx_v);
 	avformat_free_context(_ofmt_ctx_a);
-
 	avformat_close_input(&_formatCtx);
 }
 
@@ -626,15 +642,16 @@ int64_t EmediaImpl::frames(){
 	if (!_formatCtx){
 		_openFormatCtx();
 	}
-	return _formatCtx->streams[_videoStream]->nb_frames;
+
+	//nb_frames是不是帧数？？
+	return _formatCtx->streams[_videoStream]->nb_frames != 0 ? _formatCtx->streams[_videoStream]->nb_frames:(fps()*(_formatCtx->duration / AV_TIME_BASE));
 }
 
 double EmediaImpl::fps(){
 	if (!_formatCtx){
 		_openFormatCtx();
-	}
-
-	AVRational R = _formatCtx->streams[_videoStream]->avg_frame_rate;
+	}		
+	AVRational R = _formatCtx->streams[_videoStream]->avg_frame_rate;	
 	return R.num == 0 | R.den == 0 ? 0.0 : (double)R.num / (double)R.den;
 }
 

@@ -81,7 +81,7 @@ void PanelStatusModel::emb_media_path(const QString& path){
 void PanelStatusModel::ext_secret_path(const QString& path){
 	if (__extSecretPath__.compare(path)){
 		__extSecretPath__ = path;
-		__algos__[__algoIdx__]->secert_file_path(DECODE, __embSecretPath__);
+		__algos__[__algoIdx__]->secert_file_path(DECODE, __extSecretPath__);
 		emit save_ext_secret_signal(__extSecretPath__);
 	}
 }

@@ -133,7 +133,7 @@ void PanelController::start_ext_slot() {
 			QMessageBox::critical(nullptr, "视频信息隐藏系统", "没有选择秘密文件输出路径", QMessageBox::Yes);
 			return;
 		}
-		if (QMessageBox::information(nullptr, "视频信息隐藏系统", "开始信息隐藏", QMessageBox::Yes | QMessageBox::No)
+		if (QMessageBox::information(nullptr, "视频信息隐藏系统", "开始信息提取", QMessageBox::Yes | QMessageBox::No)
 			== QMessageBox::No){
 			return;
 		}

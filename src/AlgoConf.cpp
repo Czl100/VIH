@@ -81,8 +81,18 @@ void AlgoConf::encode_fps(const int fps){
 	s_cfg[ENCODE]->set("FrameRate", QString::number(fps));
 }
 void AlgoConf::output_file_path(OperaType type, const QString &path){
-	s_cfg[type]->set("OutputFile", "\"" + path + "\"");
+	if (type == ENCODE){
+		s_cfg[type]->set("OutputFile", "\"" + path + "\"");
+	}
+	else{
+		s_cfg[type]->set("OutputFile", path);
+	}
 }
 void AlgoConf::input_file_path(OperaType type, const QString &path){
-	s_cfg[type]->set("InputFile", "\""+path+"\"");
+	if (type == ENCODE){
+		s_cfg[type]->set("InputFile", "\"" + path + "\"");
+	}
+	else{
+		s_cfg[type]->set("InputFile", path);
+	}
 }

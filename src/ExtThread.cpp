@@ -25,6 +25,7 @@ void ExtThread::run(){
 	QString id = QString::number(qrand());
 	shared_ptr<Emedia> media = Emedia::generate(__mediaPath__.toStdString());
 	QString videowhere = QDir::currentPath() + "/tmp/" + id + ".264";
+	QString yuvwhere = QDir::currentPath() + "/tmp/" + id + ".yuv";
 	emit algoMessageSignal(DECODE, "读取多媒体中的视频文件...", 10);
 	media->xvideo(videowhere.toStdString());
 	if (stopped){ return; }
@@ -32,7 +33,8 @@ void ExtThread::run(){
 
 	// 2).更新配置文件
 	AlgoConf::input_file_path(DECODE, videowhere);
-	AlgoConf::sync(ENCODE);
+	AlgoConf::output_file_path(DECODE, yuvwhere);
+	AlgoConf::sync(DECODE);
 
 	// 3).配置进程环境
 	QProcess p;
@@ -67,7 +69,7 @@ void ExtThread::run(){
 			emit algoMessageSignal(DECODE, "异常码:" + QString::number(exitCode) + ", 异常信息:" + p.readAllStandardError(), 100);
 		}
 		else{
-			emit algoMessageSignal(DECODE, "【完成】", 100);
+			emit algoMessageSignal(DECODE, "提取信息完成", 100);
 		}
 	}
 	__env__.clear();

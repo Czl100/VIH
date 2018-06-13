@@ -16,7 +16,7 @@ EmbThread::EmbThread(shared_ptr<PanelStatusModel> model){
 	__workspace__ = model->workspace();
 	__exePath__ = model->exe_path();
 	__type__ = ENCODE;
-	model->emb_media_path();
+	__embMediaPath__ = model->emb_media_path();
 	model->loadEnvAndArgs(__env__, __args__);			// 秘密文件的路径是在model中的
 }
 
@@ -31,11 +31,10 @@ void EmbThread::run(){
 	QString videowhere = QDir::currentPath() + "/tmp/" + id + ".264";
 	int high = media->high();
 	int width = media->width();
-	int frames = media->frames();
-	frames = 20;
+	int frames = media->frames()-1;
 	double fps = media->fps();
 	emit algoMessageSignal(ENCODE, "开始提取音频文件...", 5);
-	media->xaudio(audiowhere.toStdString());
+//	media->xaudio(audiowhere.toStdString());
 	if (stopped){ return; }
 	emit algoMessageSignal(ENCODE, "【完成】音频文件提取", 10);
 	emit algoMessageSignal(ENCODE, "开始提取YUV...", 10);
@@ -89,8 +88,10 @@ void EmbThread::run(){
 			emit algoMessageSignal(ENCODE, "【完成】信息隐藏算法进程", 90);
 			// 5). 将264和音频结合在一起
 			emit algoMessageSignal(ENCODE, "开始封装多媒体文件", 90);
-			Emedia::combine(videowhere.toStdString(), audiowhere.toStdString(), __embMediaPath__.toStdString());
-			emit algoMessageSignal(ENCODE, "【完成】多媒体文件封装", 100);
+			//Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString(), audiowhere.toStdString());
+			Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString());
+			emit algoMessageSignal(ENCODE, "【完成】多媒体文件封装", 99);
+			emit algoMessageSignal(ENCODE, "信息隐藏完成", 100);
 		}
 	}
 	__env__.clear();
