@@ -22,7 +22,7 @@ __extShowButton__(new QPushButton("信息提取")), __embWidget__(new QGroupBox(
 __embSecretEdit__(new QLineEdit), __embMediaEdit__(new QLineEdit), __openEmbSecretButton__(new QPushButton("..")),
 __openEmbMediaButton__(new QPushButton("..")), __embButton__(new QPushButton("嵌入")),
 __extWidget__(new QGroupBox("提取面板")), __openExtSecretButton__(new QPushButton("..")), __extSecretEdit__(new QLineEdit),
-__extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")) {
+__extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")){
 	
 	setWindowTitle("视频信息隐藏系统");
 	__embProgress__->setRange(0, 100);
@@ -32,6 +32,8 @@ __extProgress__(new QProgressBar), __extButton__(new QPushButton("提取")) {
 	__openEmbSecretButton__->setFixedSize(22, 22);
 	__openEmbMediaButton__->setFixedSize(22, 22);
 	__openExtSecretButton__->setFixedSize(22, 22);
+	__embWidget__->setFixedHeight(110);
+	__extWidget__->setFixedHeight(90);
 	__init_layout__();
 }
 
@@ -156,4 +158,3 @@ void PanelView::link_controller(const IPanelController &controller){
 
 	connect(__extButton__, SIGNAL(clicked()), &controller, SLOT(start_ext_slot()));
 }
-

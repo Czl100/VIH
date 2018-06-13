@@ -22,6 +22,7 @@ public:
 	const QStringList algos_list();
 	int algo_idx();
 	OperaType opera_type();
+	QString algo_name();
 	void loadEnvAndArgs(QStringList &env, QStringList &args);
 
 // 写函数

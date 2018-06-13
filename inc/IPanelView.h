@@ -33,6 +33,7 @@ public slots :
 	virtual void save_ext_secert_slot(const QString& path) = 0;
 	virtual void emb_progress_slot(int val) = 0;
 	virtual void ext_progress_slot(int val) = 0;
+	virtual void algo_name_slot(const QString& algoName) = 0;
 	virtual void start_slot() = 0;
 	virtual void stop_slot() = 0;
 };

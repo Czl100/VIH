@@ -14,6 +14,7 @@ class QProgressBar;
 class QLineEdit;
 class QAction;
 class QGroupBox;
+class QLabel;
 
 class PanelView : public IPanelView{
 	Q_OBJECT
@@ -30,6 +31,7 @@ public slots :
 
 	void emb_progress_slot(int val) override;
 	void ext_progress_slot(int val) override;
+	void algo_name_slot(const QString& algoName) override;
 	void start_slot() override ;
 	void stop_slot() override ;
 

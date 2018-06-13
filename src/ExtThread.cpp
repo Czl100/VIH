@@ -7,6 +7,7 @@
 #include "AlgoConf.h"
 #include <QDebug>
 #include <QDir>
+#include "utils.h"
 
 using namespace std;
 
@@ -24,12 +25,12 @@ void ExtThread::run(){
 	// 1).提取264
 	QString id = QString::number(qrand());
 	shared_ptr<Emedia> media = Emedia::generate(__mediaPath__.toStdString());
+	int frames = media->frames();
 	QString videowhere = QDir::currentPath() + "/tmp/" + id + ".264";
 	QString yuvwhere = QDir::currentPath() + "/tmp/" + id + ".yuv";
-	emit algoMessageSignal(DECODE, "读取多媒体中的视频文件...", 10);
+	emit algoMessageSignal(DECODE, "读取多媒体中的视频文件...", 5);
 	media->xvideo(videowhere.toStdString());
 	if (stopped){ return; }
-	emit algoMessageSignal(DECODE, "【完成】提取多媒体的264文件", 50);
 
 	// 2).更新配置文件
 	AlgoConf::input_file_path(DECODE, videowhere);
@@ -50,13 +51,15 @@ void ExtThread::run(){
 	qDebug() << QString("[Start]  cmd:%1; env:%2").arg(strCmd).arg(strEnv);
 
 	// 4).提取秘密数据进程
-	emit algoMessageSignal(DECODE, "开始运行提取进程", 50);
+	emit algoMessageSignal(DECODE, "开始运行提取进程...", 50);
 	p.start(__exePath__, __args__);			// 进程开始执行
 	p.waitForReadyRead();
 	int cnt = 1;
 	// 没有读取完，或者stop为false则一直读
 	for (QByteArray line = p.readLine(); line.size() != 0 && (!stopped); line = p.readLine(), cnt++){
-		emit algoMessageSignal(DECODE, line, 60);		// 避免多次弹出完成对话框
+		cnt += 1;
+		int progress = (cnt * 100.0 / (frames + 10)) / 2 + 50;
+		emit algoMessageSignal(DECODE, line, progress > 99 ? 99 : progress);		// 避免多次弹出完成对话框
 		p.waitForReadyRead();
 	}
 	if (stopped){

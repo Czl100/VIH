@@ -8,6 +8,8 @@
 #include <QPushButton>
 #include <QLineEdit>
 #include <QProgressBar>
+#include <QFileInfo>
+#include <QGroupBox>
 
 void PanelView::open_media_slot(const QString& path){
 	if (path.size()){
@@ -18,6 +20,8 @@ void PanelView::open_media_slot(const QString& path){
 		__playButton__->setDisabled(false);
 		__embShowButton__->setDisabled(false);
 		__extShowButton__->setDisabled(false);
+		QFileInfo qfinfo(path);
+		this->setWindowTitle("视频信息隐藏系统 -- " + qfinfo.fileName());
 	}
 	else{
 		__playButton__->setDisabled(true);
@@ -88,4 +92,9 @@ void PanelView::stop_slot(){
 	__extSecretEdit__->setDisabled(false);
 	__embMediaEdit__->setDisabled(false);
 	__embSecretEdit__->setDisabled(false);
+}
+
+void  PanelView::algo_name_slot(const QString& algoName){
+	__embWidget__->setTitle("嵌入算法:" + algoName);
+	__extWidget__->setTitle("提取算法:" + algoName);
 }

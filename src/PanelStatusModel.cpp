@@ -20,8 +20,10 @@ void PanelStatusModel::set_view(std::shared_ptr<IPanelView> v){
 	});
 	connect(this, SIGNAL(start_signal()), v.get(), SLOT(start_slot()));
 	connect(this, SIGNAL(stop_signal()), v.get(), SLOT(stop_slot()));
+	connect(this, SIGNAL(algo_name_signal(const QString&)), v.get(), SLOT(algo_name_slot(const QString&)));
 	// 根据model的当前状态，渲染view
 	emit open_media_signal(__mediaPath__);		// __mediaPath__长度为0时，view将会认为文件不可用，置灰按钮。
+	emit algo_name_signal(algo_name());
 }
 
 // ================================ 读取数据 ================================
@@ -100,4 +102,9 @@ void PanelStatusModel::start(){
 
 void PanelStatusModel::stop(){
 	emit stop_signal();
+}
+
+void PanelStatusModel::set_algo_idx(int idx){
+	algo_idx(idx);
+	emit algo_name_signal(algo_name());
 }

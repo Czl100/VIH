@@ -10,6 +10,7 @@
 #include "EmbThread.h"
 #include "ExtThread.h"
 #include <QMessageBox>
+#include <QFile>
 
 using namespace std;
 
@@ -64,7 +65,7 @@ void PanelController::open_algorithm_slot(){
 	OpenAlgorithmsDialog dialog = OpenAlgorithmsDialog(__statusModel__->algo_idx(), __statusModel__->algos_list());
 	dialog.exec();
 	int newidx = dialog.retval();
-	__statusModel__->algo_idx(newidx);
+	__statusModel__->set_algo_idx(newidx);
 }
 
 void PanelController::open_console_slot(){

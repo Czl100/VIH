@@ -27,6 +27,7 @@ signals :
 	void save_ext_secret_signal(const QString& path);
 	void emb_progress_signal(int val);
 	void ext_progress_signal(int val);
+	void algo_name_signal(const QString& algo_name);
 	void start_signal();
 	void stop_signal();
 
@@ -47,6 +48,7 @@ public:
 	void ext_secret_path(const QString& path);
 	void emb_progress(int val);
 	void ext_progress(int val);
+	void set_algo_idx(int idx);
 	void start();
 	void stop();
 

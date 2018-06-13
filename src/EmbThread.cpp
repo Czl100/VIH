@@ -36,11 +36,9 @@ void EmbThread::run(){
 	emit algoMessageSignal(ENCODE, "开始提取音频文件...", 5);
 //	media->xaudio(audiowhere.toStdString());
 	if (stopped){ return; }
-	emit algoMessageSignal(ENCODE, "【完成】音频文件提取", 10);
 	emit algoMessageSignal(ENCODE, "开始提取YUV...", 10);
 	media->xyuv(yuvwhere.toStdString());
 	if (stopped){ return; }
-	emit algoMessageSignal(ENCODE, "【完成】YUV文件提取", 50);
 	high = media->high();
 
 	// 2).更新配置文件
@@ -66,13 +64,15 @@ void EmbThread::run(){
 	qDebug() << QString("[Start]  cmd:%1; env:%2").arg(strCmd).arg(strEnv);
 
 	// 4).进程开始
-	emit algoMessageSignal(ENCODE, "开始运行嵌入算法进程", 50);
+	emit algoMessageSignal(ENCODE, "开始运行嵌入算法进程...", 40);
 	p.start(__exePath__, __args__);			// 进程开始执行
 	p.waitForReadyRead();
 	int cnt = 1;
 	// 没有读取完，或者stop为false则一直读
 	for (QByteArray line = p.readLine(); line.size() != 0 && (!stopped); line = p.readLine(), cnt++){
-		emit algoMessageSignal(ENCODE, line, 60);		// 避免多次弹出完成对话框
+		cnt += 1;
+		int progress = (cnt * 100.0 / (frames + 30)) / 2 + 40;
+		emit algoMessageSignal(ENCODE, line, progress > 90 ? 90 : progress);		// 避免多次弹出完成对话框
 		p.waitForReadyRead();
 	}
  	if (stopped){
@@ -85,12 +85,11 @@ void EmbThread::run(){
 			emit algoMessageSignal(ENCODE, "异常码:" + QString::number(exitCode) + ", 异常信息:" + p.readAllStandardError(), 100);
 		}
 		else{
-			emit algoMessageSignal(ENCODE, "【完成】信息隐藏算法进程", 90);
 			// 5). 将264和音频结合在一起
-			emit algoMessageSignal(ENCODE, "开始封装多媒体文件", 90);
+			emit algoMessageSignal(ENCODE, "开始封装多媒体文件...", 90);
 			//Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString(), audiowhere.toStdString());
 			Emedia::combine(__embMediaPath__.toStdString(), videowhere.toStdString());
-			emit algoMessageSignal(ENCODE, "【完成】多媒体文件封装", 99);
+			emit algoMessageSignal(ENCODE, "【结束】", 99);
 			emit algoMessageSignal(ENCODE, "信息隐藏完成", 100);
 		}
 	}
