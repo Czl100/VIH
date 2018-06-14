@@ -6,9 +6,8 @@
 
 #include <QString>
 
-inline const QString& getApplicationConfigFilePath(){
-	static QString APPLICATION_CONFIG_FILE = "app.cfg";
-	return APPLICATION_CONFIG_FILE;
+inline QString app_config_path(){
+	return "app.cfg";
 }
 
 // 操作类型：编码、解码

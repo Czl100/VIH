@@ -366,6 +366,7 @@
     </CustomBuild>
     <ClInclude Include="..\..\inc\AlgoConf.h" />
     <ClInclude Include="..\..\inc\Algorithm.h" />
+    <ClInclude Include="..\..\inc\AlgorithmBuilder.h" />
     <ClInclude Include="..\..\inc\AlgosModel.h" />
     <ClInclude Include="..\..\inc\Config.h" />
     <CustomBuild Include="..\..\inc\ConsoleWindow.h">

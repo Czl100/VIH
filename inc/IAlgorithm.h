@@ -27,7 +27,7 @@ public:
 
 public:
 	virtual const QString algo_name() = 0;								// 获得算法的名字
-	virtual const QString workspace() = 0;						// 获得算法工作路径
+	virtual const QString workspace() = 0;								// 获得算法工作路径
 	virtual const QString encoder_path() = 0;							// 获得算法的编码器路径
 	virtual const QString decoder_path() = 0;							// 获得算法解码器路径
 	virtual const QString exe_path(OperaType type) = 0;					// 获得可执行文件路径

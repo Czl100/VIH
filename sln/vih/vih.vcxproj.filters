@@ -303,5 +303,8 @@
     <ClInclude Include="..\..\inc\empeg\EmpegException.h">
       <Filter>Header Files\services\empeg</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inc\AlgorithmBuilder.h">
+      <Filter>Header Files\services\algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
