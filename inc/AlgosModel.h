@@ -23,7 +23,7 @@ public:
 	int algo_idx();
 	OperaType opera_type();
 	QString algo_name();
-	void loadEnvAndArgs(QStringList &env, QStringList &args);
+	void load_env_args(QStringList &env, QStringList &args);
 
 // 写函数
 public:

@@ -38,7 +38,7 @@ public:
 	virtual void clear_param(OperaType type) = 0;											// 清空参数
 
 	// 默认参数加载方案，配置命令所需要的args和环境变量env
-	virtual void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args);
+	virtual void load_env_args(OperaType type, QStringList &env, QStringList &args);
 
 protected:
 	QString __workspace__;

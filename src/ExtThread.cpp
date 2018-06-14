@@ -16,7 +16,7 @@ ExtThread::ExtThread(std::shared_ptr<PanelStatusModel> model){
 	__workspace__ = model->workspace();
 	__exePath__ = model->exe_path();
 	__type__ = DECODE;
-	model->loadEnvAndArgs(__env__, __args__);			// 秘密文件的路径是在model中的
+	model->load_env_args(__env__, __args__);			// 秘密文件的路径是在model中的
 }
 
 void ExtThread::run(){

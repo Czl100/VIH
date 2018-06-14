@@ -28,8 +28,8 @@ int AlgosModel::algo_idx(){
 OperaType AlgosModel::opera_type(){
 	return __operaType__;
 }
-void AlgosModel::loadEnvAndArgs(QStringList &env, QStringList &args){
-	__algos__[__algoIdx__]->loadEnvAndArgs(__operaType__, env, args);
+void AlgosModel::load_env_args(QStringList &env, QStringList &args){
+	__algos__[__algoIdx__]->load_env_args(__operaType__, env, args);
 }
 
 

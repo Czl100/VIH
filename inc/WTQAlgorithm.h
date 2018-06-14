@@ -11,8 +11,8 @@ class WTQAlgorithm : public Algorithm{
 public:
 	WTQAlgorithm(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
 public:
-	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
-		Algorithm::loadEnvAndArgs(type, env, args);
+	void load_env_args(OperaType type, QStringList &env, QStringList &args) override {
+		Algorithm::load_env_args(type, env, args);
 		if (type == ENCODE){
 			
 			int idx1 = AlgoConf::emb_secret_path().lastIndexOf("/");

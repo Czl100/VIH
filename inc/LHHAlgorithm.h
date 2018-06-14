@@ -12,8 +12,8 @@ class LHHAlgorithm : public Algorithm{
 public:
 	LHHAlgorithm(const QString& algorithmsDir, const QString &_algoName) : Algorithm(algorithmsDir, _algoName){}
 public:
-	void loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args) override {
-		Algorithm::loadEnvAndArgs(type, env, args);
+	void load_env_args(OperaType type, QStringList &env, QStringList &args) override {
+		Algorithm::load_env_args(type, env, args);
 		type == ENCODE ? args.append(AlgoConf::emb_secret_path()) : args.append(AlgoConf::ext_secret_path());
 	}
 };

@@ -17,7 +17,7 @@ EmbThread::EmbThread(shared_ptr<PanelStatusModel> model){
 	__exePath__ = model->exe_path();
 	__type__ = ENCODE;
 	__embMediaPath__ = model->emb_media_path();
-	model->loadEnvAndArgs(__env__, __args__);			// 秘密文件的路径是在model中的
+	model->load_env_args(__env__, __args__);			// 秘密文件的路径是在model中的
 }
 
 void EmbThread::run(){

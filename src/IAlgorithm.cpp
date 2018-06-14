@@ -4,7 +4,7 @@
 #include "IAlgorithm.h"
 #include <QDir>
 
-void IAlgorithm::loadEnvAndArgs(OperaType type, QStringList &env, QStringList &args){
+void IAlgorithm::load_env_args(OperaType type, QStringList &env, QStringList &args){
 	QHash<QString, QString> &params = __algoParams__[type];
 	QList<QString> &keys = params.keys();
 	if (type == ENCODE){

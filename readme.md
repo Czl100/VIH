@@ -84,7 +84,8 @@ public:
         // 对于解码, args=['../../decoder.cfg'], env加载为算法缓存的param
         Algorithm::load_env_args(type, env, args);
 
-        // 2).设置自己的参数加载方式, 对于自己定义的一些参数，建议通过环境变量传参，并在算法应用程序中进行检查。不含参数时，应用程序通过标准错误流来输出错误信息。
+        // 2).设置自己的参数加载方式, 对于自己定义的一些参数，建议通过环境变量传参，并在算法应用程序中进行检查。
+        // 不含参数时，算法程序应该通过标准错误流来输出错误信息。
         AlgoConf::emb_secret_path();    // 嵌入所需要的秘密文件路径
         AlgoConf::ext_secret_path();    // 提取时秘密文件的输出路径
     }
@@ -92,7 +93,7 @@ public:
 ```
 需要注意的是，只有在需要新的参数传递方式时才需要实现新的Algorithm子类，否则都可以复用现成的Algorithm子类。
 ### 2.*AlgorithmBuilder*
-为了方便选择性的加载不同算法，因此引入了Builder模式，并构建了AlgorithmBuilder类。类AlgorithmBuilder和类Algorithm是配套的，每当实现了一个Algorithm后，就需要实现一个对应的AlgorithmBuilder。一个AlgorithmBuilder的引入需要三个步骤:
+为了方便选择性的加载不同算法，因此引入了Builder模式，并构建了AlgorithmBuilder类。Builder将会通过`build()`函数，构建一个Algorithm子类，该子类中已经实现了如何传参。因此类AlgorithmBuilder和类Algorithm是配套的，每当实现了一个Algorithm后，就需要实现一个对应的AlgorithmBuilder。一个AlgorithmBuilder的引入需要三个步骤:
 * a) 实现AlgorithmBuilder<br>
 主要是实现AlgorithmBuilder的ctor方法，这个方法用来告诉Builder如何实例化一个Algorithm。
 ```cpp
@@ -132,3 +133,4 @@ bool check_load_model(shared_ptr<PanelStatusModel> m){
 ```
 algorithms = [A算法, LHH]; [B算法, WTQ], [新算法，新算法Builder]
 ```
+对于传参模式已经存在的算法程序而言，可以直接构建算法文件夹，然后再app.cfg中指定新算法名，以及对应的Builder即可。Builder其实就是用来指定算法采用何种传参方式的，Builder将会进一步build该传参方式的Algorithm类。
