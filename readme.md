@@ -65,19 +65,45 @@ JM是一款开源的H.264/AVC编解码器，是视频信息隐藏/提取算法�
 
 ## 四、添加算法
 ### 1.*Algorithm接口*
+在源码中，每一个视频信息隐藏/提取算法都由一个Algorithm对象进行表示，该Algorithm中包含了该算法的很多信息，包括:
+* 算法名称
+* 算法工作空间路径
+* 嵌入算法可执行程序路径
+* 提取算法可执行程序路径
+* 算法环境变量
+
+由于不同的成员实现的算法不同，传参的方式也不同，Algorithm对象并不知道如何去传递参数。类Algorithm提供了`load_env_args()`方法，用来返回调用算法可执行程序前的环境变量以及参数列表。每当有一种新的传参方式的算法引入时，需要对Algorithm进行继承，并覆盖`load_env_args()`方法，用于决定Algorithm如何传参：
+```cpp
+class NewAlgorithm : public Algorithm{
+public:
+    NewAlgorithm(const QString& dir, const QString &name) : Algorithm(dir, name){}
+public:
+    void load_env_args(OperaType type, QStringList &env, QStringList &args) override {
+        // 1).父类的参数加载方式, 用来获得最基本的env和args
+        // 对于编码, args=['-d', '../../encoder.cfg'], env加载为算法缓存的param
+        // 对于解码, args=['../../decoder.cfg'], env加载为算法缓存的param
+        Algorithm::load_env_args(type, env, args);
+
+        // 2).设置自己的参数加载方式, 对于自己定义的一些参数，建议通过环境变量传参，并在算法应用程序中进行检查。不含参数时，应用程序通过标准错误流来输出错误信息。
+        AlgoConf::emb_secret_path();    // 嵌入所需要的秘密文件路径
+        AlgoConf::ext_secret_path();    // 提取时秘密文件的输出路径
+    }
+};
+```
+需要注意的是，只有在需要新的参数传递方式时才需要实现新的Algorithm子类，否则都可以复用现成的Algorithm子类。
 ### 2.*AlgorithmBuilder*
-为了方便选择性的加载不同算法，因此引入了Builder模式，并构建了AlgorithmBuilder类。类AlgorithmBuilder和类Algorithm是配套的，每当实现了一个Algorithm后，就需要实现一个对应的AlgorithmBuilder。一个AlgorithmBuilder的引入需要两个步骤:
+为了方便选择性的加载不同算法，因此引入了Builder模式，并构建了AlgorithmBuilder类。类AlgorithmBuilder和类Algorithm是配套的，每当实现了一个Algorithm后，就需要实现一个对应的AlgorithmBuilder。一个AlgorithmBuilder的引入需要三个步骤:
 * a) 实现AlgorithmBuilder<br>
 主要是实现AlgorithmBuilder的ctor方法，这个方法用来告诉Builder如何实例化一个Algorithm。
 ```cpp
 class NewBuilder : public AlgorithmBuilder{
-    IAlgorithm *ctor(const QString& algorithmsDir, const QString &_algoName) override{
-        return new NewAlgorithm(algorithmsDir, _algoName);
+    IAlgorithm *ctor(const QString& dir, const QString &name) override{
+        return new NewAlgorithm(dir, name);
     }
 };
 ```
 * b) 添加至builderMapper<br>
-为了根据app.cfg的配置加载算法，因此需要将Builder实例化，并添加至builderMapper中。
+为了根据app.cfg的配置加载算法，需要给Builder取名字，并将新算法Builder加入builderMapper。
 ```cpp
 // 本代码位于main.cpp中
 #include "NewBuilder.h"
@@ -92,6 +118,7 @@ bool check_load_model(shared_ptr<PanelStatusModel> m){
 ```
 * c) 重新编译
 
+注意，由于AlgorithmBuilder和Algorithm配套，因此也就是需要在新的传参方式的时候，才需要引入新的AlgorithmBuilder。
 ### 3.*算法文件夹*
 通过JM编译好隐藏/提取算法的可执行程序(lencod.exe/ldecod.exe)，可以构建算法文件夹。需要确保算法文件夹的命名、路径和此说明中的统一，否则无法加载算法。
 ```
@@ -101,3 +128,7 @@ bool check_load_model(shared_ptr<PanelStatusModel> m){
     └── ledecod.exe     # 信息提取算法可执行程序
 ```
 ### 4.*app.cfg*
+在app.cfg的`algorithms`的最后指定新增算法的Builder类，以及算法名。视频信息隐藏系统将会获取该算法名，在`algorithms/`文件夹下寻找同名文件夹，然后判断文件夹下面所需要的文件是否存在，若不存在则会禁止程序加载。
+```
+algorithms = [A算法, LHH]; [B算法, WTQ], [新算法，新算法Builder]
+```
