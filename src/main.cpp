@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QFileInfo>
+#include <QProcessEnvironment>
 #include "AlgoConf.h"
 #include "LHHAlgorithm.h"
 #include "WTQAlgorithm.h"
@@ -18,23 +19,30 @@
 
 using namespace std;
 
-bool loadModel(shared_ptr<PanelStatusModel> m){
+bool check_load_model(shared_ptr<PanelStatusModel> m){
 	QString algorithmsRootDir = "algorithms/";
 	// 建立builder映射
 	QHash<QString, AlgorithmBuilder*> builderMap;
 	builderMap.insert("LHH", new LHHBuilder());
 	builderMap.insert("WTQ", new WTQBuilder());
 
+	// 临时文件夹
+	QFileInfo tmpinfo("tmp");
+	if (!tmpinfo.exists()){
+		qDebug() << "[Exception] tmp dir not exists";
+		return false;
+	}
+
 	// 算法配置文件
 	if (! AlgoConf::open_algorithm_config(algorithmsRootDir)){
-		qDebug() << "[Exception] algoritum configuration open error";
+		qDebug() << "[Exception] algoritum dir open error";
 		return false;
 	}
 
 	// 算法运行环境初始化
 	QFileInfo cfginfo(app_config_path());
 	if (!cfginfo.exists()){
-		qDebug() << "[Exception] app.cfg no exists";
+		qDebug() << "[Exception] app.cfg not exists";
 		return false;
 	}
 	EncoderConfig cfg(app_config_path());
@@ -73,8 +81,8 @@ int main(int argc, char *argv[])
 	QApplication a(argc, argv);
 
 	// 配置工作路径为exe文件所在路径
-	QDir::setCurrent(QCoreApplication::applicationDirPath());
-	
+	QDir::setCurrent(QCoreApplication::applicationDirPath()+"/workspace/");
+
 	// 配置日志系统(DEBUG模式下输出到控制台，RELEASE模式下输出到日志文件)
 #ifndef _DEBUG
 	qInstallMessageHandler(customMessageHandler);	// 自定义日志输出
@@ -86,7 +94,7 @@ int main(int argc, char *argv[])
 	shared_ptr<PanelView> v = shared_ptr<PanelView>(new PanelView);
 	shared_ptr<PanelStatusModel> m = shared_ptr<PanelStatusModel>(new PanelStatusModel);
 	// 链接MVC
-	if (loadModel(m)){
+	if (check_load_model(m)){
 		c->set_view(v);
 		c->set_status_model(m);
 
