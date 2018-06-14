@@ -1,3 +1,6 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef _DECODER_CONFIG_H
 #define _DECODER_CONFIG_H
 
@@ -8,10 +11,10 @@
 class DecoderConfig : public Config{
 public:
 	DecoderConfig(QString &_fileName) : file(new QFile(_fileName)){
-		if (file->exists()){	// ÎÄ¼þ´æÔÚ£¬ÔòÖ»¶Á´ò¿ª
+		if (file->exists()){	// æ–‡ä»¶å­˜åœ¨ï¼Œåˆ™åªè¯»æ‰“å¼€
 			file->open(QIODevice::ReadOnly);
-			// ¶ÁÈ¡Ò»ÐÐ£¬²¢ÈÏÎªÎÄ±¾ºÍ±¾µØ±àÂëÄ£Ê½ÏàÍ¬£¬²¢½«Æä½âÂëÎªQString¡£
-			for (QString line(QString::fromLocal8Bit(file->readLine())); line.size() != 0; line = file->readLine()){
+			// è¯»å–ä¸€è¡Œï¼Œå¹¶è®¤ä¸ºæ–‡æœ¬å’Œæœ¬åœ°ç¼–ç æ¨¡å¼ç›¸åŒï¼Œå¹¶å°†å…¶è§£ç ä¸ºQStringã€‚
+			for (QString line(file->readLine()); line.size() != 0; line = file->readLine()){
 				if (line.right(2) == "\r\n"){ line = line.left(line.size() - 2); }
 				if (line.right(1) == "\n"){ line = line.left(line.size() - 1); }
 				QStringList sharpParts = line.split("#");
@@ -35,14 +38,14 @@ public:
 		return this;
 	}
 	void set(QString key, QString value) override{
-		if (key2idx.contains(key)){		// ´æÔÚ¸ÃkeyÔò¿ÉÒÔ¸ü¸ÄÊý¾Ý
+		if (key2idx.contains(key)){		// å­˜åœ¨è¯¥keyåˆ™å¯ä»¥æ›´æ”¹æ•°æ®
 			int idx = key2idx[key];
 			content[idx] = value;
 		}
 	}
 	const QString get(QString key) const override {
 		static QString empty = "";
-		if (key2idx.contains(key)){		// ´æÔÚ¸ÃkeyÔò¿ÉÒÔ¸ü¸ÄÊý¾Ý
+		if (key2idx.contains(key)){		// å­˜åœ¨è¯¥keyåˆ™å¯ä»¥æ›´æ”¹æ•°æ®
 			int idx = key2idx[key];
 			return content[idx];
 		}
@@ -54,7 +57,7 @@ public:
 	void sync() override{
 		file->open(QIODevice::WriteOnly);
 		for (int i = 0; i < content.size(); i++){
-			file->write((content[i]+"\n").toLocal8Bit());			// ±àÂë³É±¾µØ±àÂëÄ£Ê½ËùÖ¸¶¨µÄ¸ñÊ½
+			file->write((content[i]+"\n").toLocal8Bit());			// ç¼–ç æˆæœ¬åœ°ç¼–ç æ¨¡å¼æ‰€æŒ‡å®šçš„æ ¼å¼
 		}
 		file->flush();
 		file->close();

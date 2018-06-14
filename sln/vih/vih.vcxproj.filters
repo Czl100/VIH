@@ -215,6 +215,9 @@
     <ClCompile Include="..\..\src\empeg\EmediaImpl.cpp">
       <Filter>Source Files\services\empeg</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\utils.cpp">
+      <Filter>Source Files\services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="vih.ui">

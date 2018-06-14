@@ -1,3 +1,6 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #include"Emedia.h"
 #include"EmediaImpl.h"
 #include"EmpegException.h"
@@ -27,12 +30,12 @@ shared_ptr<Emedia> Emedia::generate(const string& path){
 Muxer::Muxer(const std::string& videoPath, const std::string& audioPath, const std::string& mediaPath)
 :_videoPath(videoPath), _audioPath(audioPath), _mediaPath(mediaPath)
 {
-	av_register_all();								//³õÊ¼»¯·â×°												
-	avformat_network_init();						//³õÊ¼»¯ÍøÂç¿â £¨¿ÉÒÔ´ò¿ªrtsp rtmp http Ğ­ÒéµÄÁ÷Ã½ÌåÊÓÆµ£©
-	avcodec_register_all();							//×¢²á½âÂëÆ÷
-	AVDictionary *opts = NULL;						//²ÎÊıÉèÖÃ
-	av_dict_set(&opts, "rtsp_transport", "tcp", 0); //ÉèÖÃrtspÁ÷ÒÑtcpĞ­Òé´ò¿ª
-	av_dict_set(&opts, "max_delay", "500", 0);		//ÍøÂçÑÓÊ±Ê±¼ä
+	av_register_all();								//åˆå§‹åŒ–å°è£…												
+	avformat_network_init();						//åˆå§‹åŒ–ç½‘ç»œåº“ ï¼ˆå¯ä»¥æ‰“å¼€rtsp rtmp http åè®®çš„æµåª’ä½“è§†é¢‘ï¼‰
+	avcodec_register_all();							//æ³¨å†Œè§£ç å™¨
+	AVDictionary *opts = NULL;						//å‚æ•°è®¾ç½®
+	av_dict_set(&opts, "rtsp_transport", "tcp", 0); //è®¾ç½®rtspæµå·²tcpåè®®æ‰“å¼€
+	av_dict_set(&opts, "max_delay", "500", 0);		//ç½‘ç»œå»¶æ—¶æ—¶é—´
 
 	_videoindex_v = -1;
 	_audioindex_a = -1;
@@ -60,7 +63,7 @@ bool Muxer::combineVideoAudio(){
 
 	av_register_all();
 
-	//--Ö¸Õë´¦Àí
+	//--æŒ‡é’ˆå¤„ç†
 	openInit();	//Input					//throw
 
 	//Output  
@@ -113,9 +116,9 @@ void Muxer::openInit()
 	const char *in_filename_v = _videoPath.c_str();
 	const char *in_filename_a = _audioPath.c_str();
 	
-	av_register_all();								//³õÊ¼»¯·â×°
+	av_register_all();								//åˆå§‹åŒ–å°è£…
 	if ((ret = avformat_open_input(&_ifmt_ctx_v, in_filename_v, 0, 0)) < 0) {
-		char buf[512] = { 0 };						//´æ·Å´íÎóÄÚÈİ
+		char buf[512] = { 0 };						//å­˜æ”¾é”™è¯¯å†…å®¹
 		av_strerror(ret, buf, sizeof(buf)-1);
 		throw OpenException("avformat_open_input error:" + std::string(buf));
 	}
@@ -125,7 +128,7 @@ void Muxer::openInit()
 
 	if (!(_audioPath.empty())){
 		if ((ret = avformat_open_input(&_ifmt_ctx_a, in_filename_a, 0, 0)) < 0) {
-			char buf[512] = { 0 };						//´æ·Å´íÎóÄÚÈİ
+			char buf[512] = { 0 };						//å­˜æ”¾é”™è¯¯å†…å®¹
 			av_strerror(ret, buf, sizeof(buf)-1);
 			throw OpenException("avformat_open_input error:" + std::string(buf));
 		}
@@ -197,7 +200,7 @@ void Muxer::writeFrame(int64_t& cur_pts_v, int64_t& cur_pts_a)
 	AVBitStreamFilterContext* aacbsfc;
 	
 	std::string fileType;
-	fileType = (_mediaPath.substr(_mediaPath.find(".") + 1));	//»ñÈ¡ÎÄ¼şÀàĞÍ
+	fileType = (_mediaPath.substr(_mediaPath.find(".") + 1));	//è·å–æ–‡ä»¶ç±»å‹
 	if (fileType == "mp4" || fileType == "flv" || fileType == "mkv"){
 		_isfilter=1;
 		h264bsfc = av_bitstream_filter_init("h264_mp4toannexb");
@@ -264,7 +267,7 @@ void Muxer::writeFrame(int64_t& cur_pts_v, int64_t& cur_pts_a)
 
 					if (pkt.stream_index == _audioindex_a){
 
-						//FIX£ºNo PTS  
+						//FIXï¼šNo PTS  
 						//Simple Write PTS  
 						if (pkt.pts == AV_NOPTS_VALUE){
 							//Write PTS  
@@ -289,7 +292,7 @@ void Muxer::writeFrame(int64_t& cur_pts_v, int64_t& cur_pts_a)
 		if (_isfilter){
 			av_bitstream_filter_filter(h264bsfc, in_stream->codec, NULL, &pkt.data, &pkt.size, pkt.data, pkt.size, 0);
 
-			//--´íÎó£¡£¡£¡£¡
+			//--é”™è¯¯ï¼ï¼ï¼ï¼
 			//av_bitstream_filter_filter(aacbsfc, out_stream->codec, NULL, &pkt.data, &pkt.size, pkt.data, pkt.size, 0);
 		}
 /*
@@ -329,14 +332,14 @@ void Muxer::writeFrame(int64_t& cur_pts_v, int64_t& cur_pts_a)
 }
 
 
-//--Ö»Ğ´Èë264ÎÄ¼ş
+//--åªå†™å…¥264æ–‡ä»¶
 void Muxer::writeFrame(){		
 	AVPacket pkt;
 	AVBitStreamFilterContext* h264bsfc;
 	AVBitStreamFilterContext* aacbsfc;
 
 	std::string fileType;
-	fileType = (_mediaPath.substr(_mediaPath.find(".") + 1));	//»ñÈ¡ÎÄ¼şÀàĞÍ
+	fileType = (_mediaPath.substr(_mediaPath.find(".") + 1));	//è·å–æ–‡ä»¶ç±»å‹
 	if (fileType == "mp4" || fileType == "flv" || fileType == "mkv"){
 		_isfilter = 1;
 		h264bsfc = av_bitstream_filter_init("h264_mp4toannexb");		

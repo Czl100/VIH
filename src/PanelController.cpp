@@ -15,25 +15,6 @@
 using namespace std;
 
 PanelController::PanelController(){
-	/*connect(&__runner__, &VihThreadRunner::runnerSignal, this, [=](int type, const QString &line, int val){
-		if (type == ENCODE){
-			__statusModel__->emb_progress(val);
-		}
-		else if(type==DECODE){
-			__statusModel__->ext_progress(val);
-		}
-		else{
-			__statusModel__->emb_progress(val);
-			__statusModel__->ext_progress(val);
-		}
-		if (!__consoleWindow__.isHidden()){
-			__consoleWindow__.append(line);
-		}
-		if (val == 100){
-			QMessageBox::information(nullptr, "视频信息隐藏系统", line, QMessageBox::Yes);
-			__statusModel__->stop();
-		}
-	});*/
 	connect(&__runner__, SIGNAL(runnerSignal(int, const QString&, int)), this, SLOT(runnerSlot(int, const QString&, int)));
 }
 

@@ -1,3 +1,6 @@
+﻿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef _CONFIG_H
 #define _CONFIG_H
 

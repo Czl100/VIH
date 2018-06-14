@@ -1,10 +1,13 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef __EMEDIA_H
 #define __EMEDIA_H
 #include <string>
 #include <memory>
 /*
 enum VideoType{
-	NONE,	//ÎŞ
+	NONE,	//æ— 
 	H264,
 	MPEG4,
 	JPEG2000
@@ -59,18 +62,18 @@ class Emedia{
 public:
 	enum VideoType{NONE, H264, MPEG4, JPEG2000};
 	virtual ~Emedia(){};
-	virtual const     std::string& where() = 0;				// ÊÓÆµËùÔÚµÄ¾ø¶ÔÂ·¾¶
-	virtual int       high()   = 0;							// ÊÓÆµÎÄ¼ş¸ß
-	virtual int       width()  = 0;							// ÊÓÆµÎÄ¼ş¿í
-	virtual int64_t   frames() = 0;							// ÊÓÆµÖ¡Êı
-	virtual double    fps()    = 0;							// ÊÓÆµÖ¡ÂÊ
-	virtual VideoType video_type() = 0;						// ÊÓÆµ¸ñÊ½
+	virtual const     std::string& where() = 0;				// è§†é¢‘æ‰€åœ¨çš„ç»å¯¹è·¯å¾„
+	virtual int       high()   = 0;							// è§†é¢‘æ–‡ä»¶é«˜
+	virtual int       width()  = 0;							// è§†é¢‘æ–‡ä»¶å®½
+	virtual int64_t   frames() = 0;							// è§†é¢‘å¸§æ•°
+	virtual double    fps()    = 0;							// è§†é¢‘å¸§ç‡
+	virtual VideoType video_type() = 0;						// è§†é¢‘æ ¼å¼
 	virtual bool	  audio_exists() = 0;
 
-	virtual bool demuxer(const std::string& videoPath, const std::string& audioPath, bool isDebug = false) = 0;	//ÌáÈ¡ÒôÆÁºÍÊÓÆµÎÄ¼ş
-	virtual bool xaudio(const std::string& path, bool isDebug = false) = 0;	// ÌáÈ¡ÒôÆµÎÄ¼şµ½Ö¸¶¨Â·¾¶
-	virtual bool xvideo(const std::string& path, bool isDebug = false) = 0;	// ÌáÈ¡ÊÓÆµÎÄ¼şµ½Ö¸¶¨Â·¾¶
-	virtual bool xyuv(  const std::string& path, bool isDebug = false) = 0;	// ÌáÈ¡ÊÓÆµÎÄ¼şÖĞµÄyuv
+	virtual bool demuxer(const std::string& videoPath, const std::string& audioPath, bool isDebug = false) = 0;	//æå–éŸ³å±å’Œè§†é¢‘æ–‡ä»¶
+	virtual bool xaudio(const std::string& path, bool isDebug = false) = 0;	// æå–éŸ³é¢‘æ–‡ä»¶åˆ°æŒ‡å®šè·¯å¾„
+	virtual bool xvideo(const std::string& path, bool isDebug = false) = 0;	// æå–è§†é¢‘æ–‡ä»¶åˆ°æŒ‡å®šè·¯å¾„
+	virtual bool xyuv(  const std::string& path, bool isDebug = false) = 0;	// æå–è§†é¢‘æ–‡ä»¶ä¸­çš„yuv
 	
 protected:
 	virtual bool _open_()=0;	
@@ -83,7 +86,7 @@ public:
 		return 0;
 	};
 
-	static void getFileType(const std::string& filename,std::string& fileType){	//»ñÈ¡ÎÄ¼şÀàĞÍ
+	static void getFileType(const std::string& filename,std::string& fileType){	//è·å–æ–‡ä»¶ç±»å‹
 		int loc = filename.find(".");
 		fileType = filename.substr(loc + 1);
 		//std::string fileType(filename.substr(loc + 1));		

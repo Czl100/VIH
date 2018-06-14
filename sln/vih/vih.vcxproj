@@ -152,6 +152,7 @@
     <ClCompile Include="..\..\src\PanelStatusModel.cpp" />
     <ClCompile Include="..\..\src\PanelView.cpp" />
     <ClCompile Include="..\..\src\PanelViewSlots.cpp" />
+    <ClCompile Include="..\..\src\utils.cpp" />
     <ClCompile Include="..\..\src\VihThread.cpp" />
     <ClCompile Include="..\..\src\VihThreadRunner.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_ConsoleWindow.cpp">

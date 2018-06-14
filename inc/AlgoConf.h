@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #pragma execution_character_set("utf-8")
 
 #ifndef __ALGO_CONF_H
@@ -13,40 +13,40 @@
 
 class AlgoConf{
 public:
-	// ´ò¿ªËã·¨ÅäÖÃÎÄ¼ş
-	static void open_algorithm_config(const QString &algorithmsDir);
-	// Í¬²½
+	// æ‰“å¼€ç®—æ³•é…ç½®æ–‡ä»¶
+	static bool open_algorithm_config(const QString &algorithmsDir);
+	// åŒæ­¥
 	static void sync(OperaType type);
 	
 
-	// ¶Á³ö
-	static const QString encoder_cfg_path();						// »ñµÃ±àÂëÆ÷ÅäÖÃÎÄ¼şÂ·¾¶
-	static const QString decoder_cfg_path();						// »ñµÃ½âÂëÆ÷ÅäÖÃÎÄ¼şÂ·¾¶
-	static const Config &config(OperaType type);					// Ö±½Ó·µ»ØÅäÖÃÎÄ¼ş
-	static const QString get(OperaType type, const QString& key);	// »ñÈ¡ÅäÖÃÎÄ¼şµÄÖµ
-	static int encode_width();										// ±àÂëµÄ¿í¶È
-	static int encode_height();										// ±àÂëµÄ¸ß¶È
-	static int encode_frames();										// ±àÂëµÄÖ¡Êı
-	static int encode_fps();										// ±àÂëµÄÂëÂÊ
-	static const QString input_file_path(OperaType type);			// ¶Á³öÊäÈëµÄÎÄ¼şÂ·¾¶
-	static const QString output_file_path(OperaType type);			// ¶Á³öÊä³öµÄÎÄ¼şÂ·¾¶
+	// è¯»å‡º
+	static const QString encoder_cfg_path();						// è·å¾—ç¼–ç å™¨é…ç½®æ–‡ä»¶è·¯å¾„
+	static const QString decoder_cfg_path();						// è·å¾—è§£ç å™¨é…ç½®æ–‡ä»¶è·¯å¾„
+	static const Config &config(OperaType type);					// ç›´æ¥è¿”å›é…ç½®æ–‡ä»¶
+	static const QString get(OperaType type, const QString& key);	// è·å–é…ç½®æ–‡ä»¶çš„å€¼
+	static int encode_width();										// ç¼–ç çš„å®½åº¦
+	static int encode_height();										// ç¼–ç çš„é«˜åº¦
+	static int encode_frames();										// ç¼–ç çš„å¸§æ•°
+	static int encode_fps();										// ç¼–ç çš„ç ç‡
+	static const QString input_file_path(OperaType type);			// è¯»å‡ºè¾“å…¥çš„æ–‡ä»¶è·¯å¾„
+	static const QString output_file_path(OperaType type);			// è¯»å‡ºè¾“å‡ºçš„æ–‡ä»¶è·¯å¾„
 	static const QString emb_secret_path();
 	static const QString ext_secret_path();
 
-	// Ğ´Èë
+	// å†™å…¥
 	static void set(const QString &key, const QString& val, OperaType type);
 	static void encode_width_height(int w, int h);
-	static void encode_width(int w);										// ±àÂëµÄ¿í¶È
-	static void encode_height(int h);										// ±àÂëµÄ¸ß¶È
-	static void encode_frames(const int frames);							// ÉèÖÃ±àÂëÖ¡Êı
-	static void encode_fps(const int fps);									// ÉèÖÃÂëÂÊ
-	static void output_file_path(OperaType type, const QString &path);		// ÉèÖÃÊä³öµÄÎÄ¼şÂ·¾¶
-	static void input_file_path(OperaType type, const QString &path);		// ÉèÖÃÊäÈëµÄÎÄ¼şÂ·¾¶
+	static void encode_width(int w);										// ç¼–ç çš„å®½åº¦
+	static void encode_height(int h);										// ç¼–ç çš„é«˜åº¦
+	static void encode_frames(const int frames);							// è®¾ç½®ç¼–ç å¸§æ•°
+	static void encode_fps(const int fps);									// è®¾ç½®ç ç‡
+	static void output_file_path(OperaType type, const QString &path);		// è®¾ç½®è¾“å‡ºçš„æ–‡ä»¶è·¯å¾„
+	static void input_file_path(OperaType type, const QString &path);		// è®¾ç½®è¾“å…¥çš„æ–‡ä»¶è·¯å¾„
 	static void emb_secret_path(const QString& path);
 	static void ext_secret_path(const QString& path);
 
 protected:
-	static std::shared_ptr<Config> s_cfg[2];			// 0-±àÂëµÄÅäÖÃÎÄ¼ş£¬ 1-½âÂëµÃÅäÖÃÎÄ¼ş
+	static std::shared_ptr<Config> s_cfg[2];			// 0-ç¼–ç çš„é…ç½®æ–‡ä»¶ï¼Œ 1-è§£ç å¾—é…ç½®æ–‡ä»¶
 	static QString s_encoderCfgPath;
 	static QString s_decoderCfgPath;
 	static bool s_isopenAlgoConfig;

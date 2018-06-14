@@ -32,8 +32,8 @@ public:
 };
 
 class WTQBuilder : public AlgorithmBuilder{
-	IAlgorithm *ctor(const QString& exeRootDir, const QString &_algoName) override{
-		return new WTQAlgorithm(exeRootDir, _algoName);
+	IAlgorithm *ctor(const QString& algorithmsDir, const QString &_algoName) override{
+		return new WTQAlgorithm(algorithmsDir, _algoName);
 	}
 };
 

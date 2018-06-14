@@ -33,7 +33,7 @@ signals :
 
 // 初始化
 public:
-	PanelStatusModel() :__mediaPath__(""), __playStatus__(STOP){}
+	PanelStatusModel() :__mediaPath__(""), __playStatus__(STOP), __wrong__(false){}
 
 // 将信号和view的slots连接
 public:
@@ -51,6 +51,7 @@ public:
 	void set_algo_idx(int idx);
 	void start();
 	void stop();
+	void wrong();
 
 // 读函数
 public:
@@ -66,6 +67,9 @@ private:
 	QString __embMediaPath__;
 	QString __extSecretPath__;
 	OperaStatus __playStatus__;
+	bool __wrong__;
+
+
 };
 
 #endif

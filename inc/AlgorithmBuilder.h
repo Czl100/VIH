@@ -9,15 +9,31 @@
 
 class AlgorithmBuilder{
 public:
-	// 该函数的职责是 调用算法的构造函数并返回
-	virtual IAlgorithm *ctor(const QString& exeRootDir, const QString &_algoName) = 0;
-private:
-	IAlgorithm *build(const QString& exeRootDir, const QString &_algoName){
+	IAlgorithm *build(const QString& algorithmsDir, const QString &_algoName){
 		// 校验
+		QString lencodPath = algorithmsDir + "/" + _algoName + "/lencod.exe";
+		QString ldecodPath = algorithmsDir + "/" + _algoName + "/ldecod.exe";
+		QString workspacePath = algorithmsDir + "/" + _algoName + "/workspace/";
+
+		QFileInfo lencodFileInfo(lencodPath);
+		QFileInfo ldecodFileInfo(lencodPath);
+		QFileInfo workspaceFileInfo(lencodPath);
+
+
+		if (
+		(!lencodFileInfo.exists()) ||
+		(!ldecodFileInfo.exists()) ||
+		(!workspaceFileInfo.exists())
+		){
+			return nullptr;
+		}
 
 		// 创建
-		return ctor(exeRootDir, _algoName);
+		return ctor(algorithmsDir, _algoName);
 	}
+private:
+	// 该函数的职责是 调用算法的构造函数并返回
+	virtual IAlgorithm *ctor(const QString& algorithmsDir, const QString &_algoName) = 0;
 };
 
 #endif

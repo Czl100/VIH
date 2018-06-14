@@ -1,3 +1,6 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #include "PanelStatusModel.h"
 #include "IPanelView.h"
 #include "AlgoConf.h"
@@ -10,23 +13,17 @@ void PanelStatusModel::set_view(std::shared_ptr<IPanelView> v){
 	connect(this, SIGNAL(save_emb_media_signal(const QString&)), v.get(), SLOT(save_emb_media_slot(const QString&)));
 
 	connect(this, SIGNAL(save_ext_secret_signal(const QString&)), v.get(), SLOT(save_ext_secert_slot(const QString&)));
-	//connect(this, SIGNAL(emb_progress_signal(int val)), v.get(), SLOT(emb_progress_slot(int val)));
-	//connect(this, SIGNAL(ext_progress_signal(int val)), v.get(), SLOT(ext_progress_slot(int val)));
-	connect(this, &PanelStatusModel::emb_progress_signal, v.get(), [=](int val){
-		v.get()->emb_progress_slot(val);
-	});
-	connect(this, &PanelStatusModel::ext_progress_signal, v.get(), [=](int val){
-		v.get()->ext_progress_slot(val);
-	});
+	connect(this, SIGNAL(emb_progress_signal(int)), v.get(), SLOT(emb_progress_slot(int)));
+	connect(this, SIGNAL(ext_progress_signal(int)), v.get(), SLOT(ext_progress_slot(int)));
 	connect(this, SIGNAL(start_signal()), v.get(), SLOT(start_slot()));
 	connect(this, SIGNAL(stop_signal()), v.get(), SLOT(stop_slot()));
 	connect(this, SIGNAL(algo_name_signal(const QString&)), v.get(), SLOT(algo_name_slot(const QString&)));
-	// ¸ù¾İmodelµÄµ±Ç°×´Ì¬£¬äÖÈ¾view
-	emit open_media_signal(__mediaPath__);		// __mediaPath__³¤¶ÈÎª0Ê±£¬view½«»áÈÏÎªÎÄ¼ş²»¿ÉÓÃ£¬ÖÃ»Ò°´Å¥¡£
+	// æ ¹æ®modelçš„å½“å‰çŠ¶æ€ï¼Œæ¸²æŸ“view
+	emit open_media_signal(__mediaPath__);		// __mediaPath__é•¿åº¦ä¸º0æ—¶ï¼Œviewå°†ä¼šè®¤ä¸ºæ–‡ä»¶ä¸å¯ç”¨ï¼Œç½®ç°æŒ‰é’®ã€‚
 	emit algo_name_signal(algo_name());
 }
 
-// ================================ ¶ÁÈ¡Êı¾İ ================================
+// ================================ è¯»å–æ•°æ® ================================
 const QString& PanelStatusModel::media_path(){
 	return __mediaPath__;
 }
@@ -46,9 +43,9 @@ const QString& PanelStatusModel::ext_secret_path(){
 	return __extSecretPath__;
 }
 
-// ================================ Ğ´ÈëÊı¾İ ================================
+// ================================ å†™å…¥æ•°æ® ================================
 void PanelStatusModel::media_path(const QString& path){
-	// Â·¾¶²»Í¬ÔòÖØĞÂ´ò¿ªÃ½Ìå
+	// è·¯å¾„ä¸åŒåˆ™é‡æ–°æ‰“å¼€åª’ä½“
 	if (__mediaPath__.compare(path)){
 		__mediaPath__ = path;
 		emit open_media_signal(__mediaPath__);
@@ -64,7 +61,7 @@ void PanelStatusModel::play_status(OperaStatus status) {
 }
 
 void PanelStatusModel::emb_secret_path(const QString& secertPath, bool sync){
-	// Â·¾¶²»Í¬ÔòÖØĞÂ´ò¿ªÃ½Ìå
+	// è·¯å¾„ä¸åŒåˆ™é‡æ–°æ‰“å¼€åª’ä½“
 	if (__embSecretPath__.compare(secertPath)){
 		__embSecretPath__ = secertPath;
 		AlgoConf::emb_secret_path(__embSecretPath__);
@@ -75,7 +72,7 @@ void PanelStatusModel::emb_secret_path(const QString& secertPath, bool sync){
 }
 
 void PanelStatusModel::emb_media_path(const QString& path, bool sync){
-	// Â·¾¶²»Í¬ÔòÖØĞÂ´ò¿ªÃ½Ìå
+	// è·¯å¾„ä¸åŒåˆ™é‡æ–°æ‰“å¼€åª’ä½“
 	if (__embMediaPath__.compare(path)){
 		__embMediaPath__ = path;
 		if (sync){
@@ -113,4 +110,8 @@ void PanelStatusModel::stop(){
 void PanelStatusModel::set_algo_idx(int idx){
 	algo_idx(idx);
 	emit algo_name_signal(algo_name());
+}
+
+void PanelStatusModel::wrong(){
+	__wrong__ = true;
 }

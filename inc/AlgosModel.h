@@ -30,6 +30,7 @@ public:
 	void add_algorithm(std::shared_ptr<IAlgorithm> algorithm);
 	void algo_idx(int idx);
 	void opera_type(OperaType type);
+	
 
 protected:
 	QList<std::shared_ptr<IAlgorithm>> __algos__;

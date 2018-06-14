@@ -1,3 +1,6 @@
+ï»¿#pragma once
+#pragma execution_character_set("utf-8")
+
 #ifndef _ENCODER_CONFIG_H
 #define _ENCODER_CONFIG_H
 
@@ -8,9 +11,9 @@
 class EncoderConfig : public Config{
 public:
 	EncoderConfig(const QString &_fileName) : file(new QFile(_fileName)){
-		if (file->exists()){	// ÎÄ¼ş´æÔÚ£¬ÔòÖ»¶Á´ò¿ª
+		if (file->exists()){	// æ–‡ä»¶å­˜åœ¨ï¼Œåˆ™åªè¯»æ‰“å¼€
 			file->open(QIODevice::ReadOnly);
-			// ¶ÁÈ¡Ò»ĞĞ£¬²¢ÈÏÎªÎÄ±¾ºÍ±¾µØ±àÂëÄ£Ê½ÏàÍ¬£¬²¢½«Æä½âÂëÎªQString¡£
+			// è¯»å–ä¸€è¡Œï¼Œå¹¶è®¤ä¸ºæ–‡æœ¬å’Œæœ¬åœ°ç¼–ç æ¨¡å¼ç›¸åŒï¼Œå¹¶å°†å…¶è§£ç ä¸ºQStringã€‚
 			for (QString line(QString::fromLocal8Bit(file->readLine())); line.size() != 0; line = file->readLine()){
 				if (line.right(2) == "\r\n"){ line = line.left(line.size() - 2); }
 				if (line.right(1) == "\n"){ line = line.left(line.size() - 1); }
@@ -43,7 +46,7 @@ public:
 	}
 	const QString get(QString key) const override{
 		static QString empty = "";
-		if (content.contains(key)){		// ´æÔÚ¸ÃkeyÔò¿ÉÒÔ¸ü¸ÄÊı¾İ
+		if (content.contains(key)){		// å­˜åœ¨è¯¥keyåˆ™å¯ä»¥æ›´æ”¹æ•°æ®
 			return content[key];
 		}
 		return empty;
@@ -57,7 +60,7 @@ public:
 		for (int i = 0; i < linked.size(); i++){
 			QString key = linked[i];
 			QString val = content[key];
-			file->write((key+" = "+val+"\n").toLocal8Bit());		// ¸ù¾İ±¾µØ±àÂëÄ£Ê½£¬½«×Ö·û´®±àÂëÎªQByteArray.
+			file->write((key+" = "+val+"\n").toLocal8Bit());		// æ ¹æ®æœ¬åœ°ç¼–ç æ¨¡å¼ï¼Œå°†å­—ç¬¦ä¸²ç¼–ç ä¸ºQByteArray.
 		}
 		file->flush();
 		file->close();

@@ -1,6 +1,10 @@
-﻿
+﻿#pragma once
+#pragma execution_character_set("utf-8")
+
 #include "AlgoConf.h"
 #include <QDir>
+#include <QFileInfo>
+
 using namespace std;
 
 std::shared_ptr<Config> AlgoConf::s_cfg[2] = { nullptr, nullptr };
@@ -10,9 +14,17 @@ bool AlgoConf::s_isopenAlgoConfig = false;
 QString AlgoConf::s_embSecretPath = "";
 QString AlgoConf::s_extSecretPath = "";
 
-void AlgoConf::open_algorithm_config(const QString &algorithmsDir){
+bool AlgoConf::open_algorithm_config(const QString &algorithmsDir){
 	s_encoderCfgPath = algorithmsDir + "/encoder.cfg";
 	s_decoderCfgPath = algorithmsDir + "/decoder.cfg";
+
+	
+	QFileInfo encoderCfg(s_encoderCfgPath);
+	QFileInfo decoderCfg(s_decoderCfgPath);
+	if ((!encoderCfg.exists()) ||
+		(!decoderCfg.exists())){
+		return false;
+	}
 
 	// 加载配置文件到内存
 	s_cfg[0] = std::shared_ptr<Config>(new EncoderConfig(s_encoderCfgPath));
@@ -23,6 +35,8 @@ void AlgoConf::open_algorithm_config(const QString &algorithmsDir){
 		->map("Decoded Pircture Buffer", 3)
 		->map("SNR Offset", 5));
 	s_isopenAlgoConfig = true;
+
+	return true;
 }
 
 

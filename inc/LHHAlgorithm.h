@@ -19,8 +19,8 @@ public:
 };
 
 class LHHBuilder : public AlgorithmBuilder{
-	IAlgorithm *ctor(const QString& exeRootDir, const QString &_algoName) override{
-		return new LHHAlgorithm(exeRootDir, _algoName);
+	IAlgorithm *ctor(const QString& algorithmsDir, const QString &_algoName) override{
+		return new LHHAlgorithm(algorithmsDir, _algoName);
 	}
 };
 

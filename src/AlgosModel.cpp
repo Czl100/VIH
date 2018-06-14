@@ -1,4 +1,7 @@
-﻿#include "AlgosModel.h"
+﻿#pragma once
+#pragma execution_character_set("utf-8")
+
+#include "AlgosModel.h"
 
 AlgosModel::AlgosModel() :__algoIdx__(0), __operaType__(ENCODE){}
 
