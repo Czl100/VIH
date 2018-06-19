@@ -3,6 +3,7 @@
 ## 一、开发环境
 * Windows 64bit
 * Visual Studio 2013
+
 ### 1.*Qt 5.8*
 引用Qt官网的介绍：
 >Easily create connected devices, UIs and applications with native C++ performance. It’s powerful, yet compact, has intuitive tools and libraries and will blow your mind!
