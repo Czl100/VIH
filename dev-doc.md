@@ -16,10 +16,13 @@ FFmpeg是一款基于C/C++的跨平台的多媒体处理方案，提供了用于
 #### 1).下载
 在[这里](https://ffmpeg.zeranoe.com/builds/)进入FFmpeg的下载页，并且选择[4.0-Win64-Shared]和[4.0-Win64-Dev]两款进行下载。
 ![](material/ffmpeg-down.png)
+
 将Dev版本中的include文件夹和lib文件夹移动到本仓库的ffmpeg文件夹(若该文件夹不存在，请`新建ffmpeg文件夹`)下。
 ![](material/ffmpeg-dev.png)
+
 将Shared版本的bin文件夹移动到本仓库的ffmpeg文件夹下。
 ![](material/ffmpeg-shared.png)
+
 最终的ffmpeg文件夹如下图所示：
 ![](material/ffmpeg.png)
 
