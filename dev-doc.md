@@ -5,7 +5,7 @@
 * Visual Studio 2013
 ### 1.*Qt 5.8*
 引用Qt官网的介绍：
->>Easily create connected devices, UIs and applications with native C++ performance. It’s powerful, yet compact, has intuitive tools and libraries and will blow your mind!
+>Easily create connected devices, UIs and applications with native C++ performance. It’s powerful, yet compact, has intuitive tools and libraries and will blow your mind!
 
 Qt编写的工程是无法直接通过C++直接编译的，需要通过Qt进行预编译。Qt Creater是一款轻量级的Qt-IDE，对Qt的预编译支持非常好，但是由于Qt Creater的调试效率不及Visual Studio，因此为了让Visual Studio支持Qt预编译及其他Qt功能，需要在Visual Studio上安装Qt插件。
 
