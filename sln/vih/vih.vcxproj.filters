@@ -309,5 +309,8 @@
     <ClInclude Include="..\..\inc\AlgorithmBuilder.h">
       <Filter>Header Files\services\algorithm</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\inc\LSJAlgorithm.h">
+      <Filter>Header Files\services\algorithm</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -14,6 +14,7 @@
 #include "AlgoConf.h"
 #include "LHHAlgorithm.h"
 #include "WTQAlgorithm.h"
+#include "LSJAlgorithm.h"
 #include "defines.h"
 #include "utils.h"
 
@@ -25,6 +26,7 @@ bool check_load_model(shared_ptr<PanelStatusModel> m){
 	QHash<QString, AlgorithmBuilder*> builderMap;
 	builderMap.insert("LHH", new LHHBuilder());
 	builderMap.insert("WTQ", new WTQBuilder());
+	builderMap.insert("LSJ", new LSJBuilder());
 
 	// 临时文件夹
 	QFileInfo tmpinfo("tmp");

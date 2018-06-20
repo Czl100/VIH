@@ -135,6 +135,6 @@ bool check_load_model(shared_ptr<PanelStatusModel> m){
 ### 4.*app.cfg*
 在app.cfg的`algorithms`的最后指定新增算法的Builder类，以及算法名。视频信息隐藏系统将会获取该算法名，在`algorithms/`文件夹下寻找同名文件夹，然后判断文件夹下面所需要的文件是否存在，若不存在则会禁止程序加载。
 ```
-algorithms = [A算法, LHH]; [B算法, WTQ], [新算法，新算法Builder]
+algorithms = [A算法, LHH]; [B算法, WTQ]; [新算法，新算法Builder];
 ```
 对于传参模式已经存在的算法程序而言，可以直接构建算法文件夹，然后再app.cfg中指定新算法名，以及对应的Builder即可。Builder其实就是用来指定算法采用何种传参方式的，Builder将会进一步build该传参方式的Algorithm类。

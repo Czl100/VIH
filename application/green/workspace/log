@@ -2,3 +2,34 @@ Message:========================================================================
 Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 14:04:04 2018
 Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 14:04:04 2018
 Message:[Exception] algoritum configuration open error File: Line:0 Function: DateTime???? ???? 14 14:04:04 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 15:16:30 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 15:16:30 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 15:16:30 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 15:16:31 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 15:44:51 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 15:44:51 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 15:44:51 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 15:44:51 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 17:48:13 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 17:48:13 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 17:48:13 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 17:48:14 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 18:06:47 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:06:47 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:06:47 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 18:06:47 2018
+Message:"[Start]  cmd:algorithms//????????????????????/lencod.exe ; env:-d ../../encoder.cfg D:/Design/cpp/vih/application/green/workspace/test/1.txt " File: Line:0 Function: DateTime???? ???? 14 18:08:45 2018
+Message:"[Start]  cmd:algorithms//????????????????????/ldecod.exe ; env:../../decoder.cfg D:/Design/cpp/vih/application/green/workspace/test/ext.txt " File: Line:0 Function: DateTime???? ???? 14 18:10:04 2018
+Message:"[Start]  cmd:algorithms//????????????????????/ldecod.exe ; env:../../decoder.cfg D:/Design/cpp/vih/application/green/workspace/test/ext.txt " File: Line:0 Function: DateTime???? ???? 14 18:10:52 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 18:16:28 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:16:28 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:16:28 2018
+Message:[Exception] algorithm package need '[]' File: Line:0 Function: DateTime???? ???? 14 18:16:28 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 18:16:49 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:16:50 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:16:50 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 18:16:50 2018
+Message:========================================================================================= File: Line:0 Function: DateTime???? ???? 14 18:17:34 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:17:34 2018
+Message:QWidget::setLayout: Attempting to set QLayout "" on QGroupBox "", which already has a layout File: Line:0 Function: DateTime???? ???? 14 18:17:34 2018
+Message:Video Information Hide System is running... File: Line:0 Function: DateTime???? ???? 14 18:17:35 2018
