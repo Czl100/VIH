@@ -1,10 +1,7 @@
-Ôªø#pragma once
-#pragma execution_character_set("utf-8")
-
 #include<string>
 //class string;
 #include<exception>
-//class string;					//Â£∞Êòé‰ºöÂá∫ÈóÆÈ¢ò
+//class string;					//…˘√˜ª·≥ˆŒ Ã‚
 #ifndef _EMPEGEXCEPTION_H
 #define _EMPEGEXCEPTION_H
 
@@ -16,7 +13,7 @@ private:
 	std::string _w;
 	AVFormatContext* _avformatCtx = nullptr;
 };
-//--------Â∞ÅË£ÖÂ±ÇÂºÇÂ∏∏---------------------------
+//--------∑‚◊∞≤„“Ï≥£---------------------------
 class OpenException :public std::exception
 {
 public:
@@ -27,12 +24,12 @@ public:
 	OpenException(const std::string  w, AVCodecContext*  avcodecCtc)  :_avcodecCtc(avcodecCtc), _where(w){};
 	OpenException(const std::string  w, AVCodec       *  avcodec)     :_avcodec(avcodec), _where(w){};
 	
-	virtual const std::string& what() { return _reson; };		//ÂºÇÂ∏∏ÂéüÂõ†
+	virtual const std::string& what() { return _reson; };		//“Ï≥£‘≠“Ú
 	virtual void what(const AVFormatContext* avformatCtx, const AVCodecContext* avcodecCtc){
 		_avformatCtx=avformatCtx;
 		_avcodecCtc = avcodecCtc;
 	};		
-	virtual const std::string& where(){ return _where; };		//ÂºÇÂ∏∏‰ΩçÁΩÆ
+	virtual const std::string& where(){ return _where; };		//“Ï≥£Œª÷√
 private:
 	std::string _reson;
 	std::string _where;
@@ -41,7 +38,7 @@ private:
 	const AVCodec*		   _avcodec     = nullptr;
 };
 
-//-------Êï∞ÊçÆÊµÅÂ±ÇÂºÇÂ∏∏--------------------------
+//------- ˝æ›¡˜≤„“Ï≥£--------------------------
 class StreamExceptionPara :public std::exception
 {
 public:
@@ -50,8 +47,8 @@ public:
 	StreamExceptionPara(const std::string w, AVFormatContext* avformatCtx) :_avformatCtx(avformatCtx), _where(w){};
 	StreamExceptionPara(const std::string w, AVCodecContext*  avcodecCtc)  :_avcodecCtc(avcodecCtc)  ,   _where(w){};
 	StreamExceptionPara(const std::string w, AVStream*        avstream)    :_avstream(avstream)      , _where(w){};
-	virtual const std::string& what() { return _reson; };		//ÂºÇÂ∏∏ÂéüÂõ†
-	virtual const std::string& where(){ return _where; };		//ÂºÇÂ∏∏‰ΩçÁΩÆ
+	virtual const std::string& what() { return _reson; };		//“Ï≥£‘≠“Ú
+	virtual const std::string& where(){ return _where; };		//“Ï≥£Œª÷√
 	
 	virtual void what(AVFormatContext* avformatCtx, AVCodecContext* avcodecCtc) {
 		_avformatCtx = avformatCtx;	_avcodecCtc = avcodecCtc;
@@ -67,7 +64,7 @@ private:
 	const AVStream*		 _avstream    = nullptr;
 };
 
-//-------ÂÜôÊï∞ÊçÆÂºÇÂ∏∏--------------------------
+//-------–¥ ˝æ›“Ï≥£--------------------------
 class WriteExceptionPara :public std::exception
 {
 public:
@@ -76,8 +73,8 @@ public:
 	WriteExceptionPara(const std::string w, AVCodecContext*  avcodecCtc)  :_avcodecCtc(avcodecCtc), _where(w){};
 	WriteExceptionPara(AVFormatContext* avformatCtx, AVPacket* packet)    :_avformatCtx(avformatCtx), _packet(packet){};
 	WriteExceptionPara(std::string r, AVFormatContext* avformatCtx, AVPacket* packet) :_reson(r),_avformatCtx(avformatCtx), _packet(packet){};
-	virtual const std::string& what() { return _reson; };		//ÂºÇÂ∏∏ÂéüÂõ†
-	virtual const std::string& where(){ return _where; };		//ÂºÇÂ∏∏‰ΩçÁΩÆ
+	virtual const std::string& what() { return _reson; };		//“Ï≥£‘≠“Ú
+	virtual const std::string& where(){ return _where; };		//“Ï≥£Œª÷√
 
 private:
 	std::string _reson;
@@ -87,7 +84,7 @@ private:
 	AVPacket*		 _packet;// = nullptr;
 };
 
-//-------Ëß£Á†ÅÂ±ÇÂºÇÂ∏∏--------------------------
+//-------Ω‚¬Î≤„“Ï≥£--------------------------
 class DecodeExceptionPara :public std::exception
 {
 public:
@@ -96,8 +93,8 @@ public:
 	DecodeExceptionPara(AVCodecContext*  avcodecCtc, AVPacket*	packet) :_avcodecCtc(avcodecCtc), _packet(packet){};
 	DecodeExceptionPara(AVCodecContext*  avcodecCtc, AVFrame*  frame)   :_avcodecCtc(avcodecCtc), _frame(frame){};
 	//DecodeExceptionPara(std::string w, std::string r = '\0') :_reson(r), _where(w){};
-	virtual const std::string& what() { return _reson; };		//ÂºÇÂ∏∏ÂéüÂõ†
-	virtual const std::string& where(){ return _where; };		//ÂºÇÂ∏∏‰ΩçÁΩÆ
+	virtual const std::string& what() { return _reson; };		//“Ï≥£‘≠“Ú
+	virtual const std::string& where(){ return _where; };		//“Ï≥£Œª÷√
 
 private:
 	std::string _reson;
@@ -107,15 +104,15 @@ private:
 	AVFrame*		 _frame;
 };
 
-//-------ÂèÇÊï∞ÂºÇÂ∏∏--------------------------
+//-------≤Œ ˝“Ï≥£--------------------------
 class ParamExceptionPara :public std::exception
 {
 public:
 	//, std::string r = "\0"			_reson(r), 
 	ParamExceptionPara(const std::string   w) :_where(w){};
 	ParamExceptionPara(const std::string src, const std::string dst) :_src(src), _dst(dst){};
-	virtual const std::string& what() { return _dst; };								//ÂºÇÂ∏∏ÂéüÂõ†
-	virtual const std::string& where(){ return _where; };							//ÂºÇÂ∏∏‰ΩçÁΩÆ
+	virtual const std::string& what() { return _dst; };								//“Ï≥£‘≠“Ú
+	virtual const std::string& where(){ return _where; };							//“Ï≥£Œª÷√
 
 private:
 	std::string _reson;

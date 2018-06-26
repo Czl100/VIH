@@ -1,1 +1,3 @@
-123456
+1234567
+输出目录--变量名:OutDir    值:$(SolutionDir)$(Configuration)\
+    改为$(SolutionDir)\Temp\Link\$(ProjectName)\$(ConfigurationName

@@ -2,13 +2,13 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <QTDIR>D:\Qt\Qt5.8.0\5.8\msvc2013_64</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH);D:\Design\cpp\vih\ffmpeg\bin\win64</LocalDebuggerEnvironment>
+    <QTDIR>D:\QtSoft\Qt5.6.2\5.6\msvc2013_64</QTDIR>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)%3b..\..\ffmpeg\bin\win64</LocalDebuggerEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <QTDIR>D:\Qt\Qt5.8.0\5.8\msvc2013_64</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH);D:\Design\cpp\vih\ffmpeg\bin\win64</LocalDebuggerEnvironment>
+    <QTDIR>D:\QtSoft\Qt5.6.2\5.6\msvc2013_64</QTDIR>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b$(PATH)%3b..\..\ffmpeg\bin\win64</LocalDebuggerEnvironment>
   </PropertyGroup>
 </Project>

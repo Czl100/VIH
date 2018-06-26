@@ -1,6 +1,3 @@
-ï»¿#pragma once
-#pragma execution_character_set("utf-8")
-
 #ifndef __EMEDIA_IMPL_H
 #define __EMEDIA_IMPL_H
 
@@ -29,7 +26,7 @@ public:
 	bool xyuv(const std::string& path, bool isDebug=0)     override;
 
 protected:
-	void _openFormatCtx();							//æ‰“å¼€è¾“å…¥formatContextå¹¶find streams
+	void _openFormatCtx();							//´ò¿ªÊäÈëformatContext²¢find streams
 	bool _open_() override;
 	bool _read_frame(AVPacket& pkt);
 	bool _decode    (AVPacket* pkt, AVFrame& yuv);
@@ -37,18 +34,18 @@ protected:
 	void creatStream();
 	//bool _yuv_rgb();
 private:
-	std::string _filePath;								 //æºæ–‡ä»¶
-	std::string  _fileType;						 //æ–‡ä»¶ç±»å‹(mp4..)
+	std::string _filePath;								 //Ô´ÎÄ¼ş
+	std::string  _fileType;						 //ÎÄ¼şÀàĞÍ(mp4..)
 	
-	AVFormatContext*   _formatCtx  = nullptr;               //æºæ–‡ä»¶æ ¼å¼
-	AVFormatContext*   _ofmt_ctx_v = nullptr;              //è¾“å‡ºè§†é¢‘æ ¼å¼
-	AVFormatContext*   _ofmt_ctx_a = nullptr;              //è¾“å‡ºéŸ³é¢‘æ ¼å¼
+	AVFormatContext*   _formatCtx  = nullptr;               //Ô´ÎÄ¼ş¸ñÊ½
+	AVFormatContext*   _ofmt_ctx_v = nullptr;              //Êä³öÊÓÆµ¸ñÊ½
+	AVFormatContext*   _ofmt_ctx_a = nullptr;              //Êä³öÒôÆµ¸ñÊ½
 	AVOutputFormat*    _ofmt_v = nullptr;
 	AVOutputFormat*    _ofmt_a = nullptr;
 	AVCodecContext*    _encodecCtx = nullptr;
    
 	int _videoStream; 
-	int _audioStream;								 //éŸ³è§†é¢‘ç´¢å¼•ï¼Œè¯»å–æ—¶åŒºåˆ†éŸ³è§†é¢‘
+	int _audioStream;								 //ÒôÊÓÆµË÷Òı£¬¶ÁÈ¡Ê±Çø·ÖÒôÊÓÆµ
 	int _flag;
 	int _ret = 0;
     //static hash_map<AVCodecID, VideoType> _videoTypeMap;

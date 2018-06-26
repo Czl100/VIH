@@ -1,13 +1,10 @@
-﻿#pragma once
-#pragma execution_character_set("utf-8")
-
-#ifndef __EMEDIA_H
+﻿#ifndef __EMEDIA_H
 #define __EMEDIA_H
 #include <string>
 #include <memory>
 /*
 enum VideoType{
-	NONE,	//无
+	NONE,	//��
 	H264,
 	MPEG4,
 	JPEG2000
@@ -62,18 +59,18 @@ class Emedia{
 public:
 	enum VideoType{NONE, H264, MPEG4, JPEG2000};
 	virtual ~Emedia(){};
-	virtual const     std::string& where() = 0;				// 视频所在的绝对路径
-	virtual int       high()   = 0;							// 视频文件高
-	virtual int       width()  = 0;							// 视频文件宽
-	virtual int64_t   frames() = 0;							// 视频帧数
-	virtual double    fps()    = 0;							// 视频帧率
-	virtual VideoType video_type() = 0;						// 视频格式
+	virtual const     std::string& where() = 0;				// ��Ƶ���ڵľ���·��
+	virtual int       high()   = 0;							// ��Ƶ�ļ���
+	virtual int       width()  = 0;							// ��Ƶ�ļ���
+	virtual int64_t   frames() = 0;							// ��Ƶ֡��
+	virtual double    fps()    = 0;							// ��Ƶ֡��
+	virtual VideoType video_type() = 0;						// ��Ƶ��ʽ
 	virtual bool	  audio_exists() = 0;
 
-	virtual bool demuxer(const std::string& videoPath, const std::string& audioPath, bool isDebug = false) = 0;	//提取音屏和视频文件
-	virtual bool xaudio(const std::string& path, bool isDebug = false) = 0;	// 提取音频文件到指定路径
-	virtual bool xvideo(const std::string& path, bool isDebug = false) = 0;	// 提取视频文件到指定路径
-	virtual bool xyuv(  const std::string& path, bool isDebug = false) = 0;	// 提取视频文件中的yuv
+	virtual bool demuxer(const std::string& videoPath, const std::string& audioPath, bool isDebug = 0) = 0;	//��ȡ��������Ƶ�ļ�
+	virtual bool xaudio(const std::string& path, bool isDebug = 0) = 0;	// ��ȡ��Ƶ�ļ���ָ��·��
+	virtual bool xvideo(const std::string& path, bool isDebug = 0) = 0;	// ��ȡ��Ƶ�ļ���ָ��·��
+	virtual bool xyuv(  const std::string& path, bool isDebug=0) = 0;	// ��ȡ��Ƶ�ļ��е�yuv
 	
 protected:
 	virtual bool _open_()=0;	
@@ -86,7 +83,7 @@ public:
 		return 0;
 	};
 
-	static void getFileType(const std::string& filename,std::string& fileType){	//获取文件类型
+	static void getFileType(const std::string& filename,std::string& fileType){	//��ȡ�ļ�����
 		int loc = filename.find(".");
 		fileType = filename.substr(loc + 1);
 		//std::string fileType(filename.substr(loc + 1));		
